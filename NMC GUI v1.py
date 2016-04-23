@@ -1,3 +1,16 @@
+#--------------------------------
+
+# NMC GUI v1.2
+
+# 
+
+# NOTE: You will have to quit the program to see the values printed properly. Either that or press the button twice
+
+#
+
+#--------------------------------------------
+
+
 from Tkinter import *
 from PIL import ImageTk, Image
 
@@ -6,6 +19,7 @@ class Start_UI:
                 
         def __init__(self, root):
                 
+                #creating methods to change the image when the mouse hovers over
                 def monday_L(event, pic):
                         label_monday.config(image= pic)
                                                     
@@ -23,10 +37,10 @@ class Start_UI:
                 
                 def lift_monday(event):
                         monday_main.lift()                
-   
+                        
                 root.title("NMC Scheduler")
                         
-                #GETTING PICTURES
+                #Getting the default pictures
                 nl_mon_pic = PhotoImage(file="MS_NL_Mon.gif")
                 nl_tues_pic = PhotoImage(file="MS_NL_Tues.gif")
                 nl_wed_pic = PhotoImage(file="MS_NL_Wed.gif")
@@ -38,9 +52,11 @@ class Start_UI:
                 l_wed_pic = PhotoImage(file="MS_L_Wed.gif")
                 l_thurs_pic = PhotoImage(file="MS_L_Thurs.gif")
                 l_fri_pic = PhotoImage(file="MS_L_Fri.gif")
-                        
+                
+                #creating a label for each image        
                 label_monday = Label(root, image= nl_mon_pic, borderwidth = 0, highlightthickness= 0)
                 label_monday.grid(row=0)
+                #changing what the label does when it is hovered over or clicked.
                 label_monday.bind("<Enter>", lambda event: monday_L(event, l_mon_pic))
                 label_monday.bind("<Leave>", lambda event: monday_L(event, nl_mon_pic))
                 label_monday.bind("<Button-1>", lift_monday)
@@ -68,18 +84,103 @@ class Start_UI:
                 label_friday.bind("<Enter>", lambda event: friday_L(event, l_fri_pic))
                 label_friday.bind("<Leave>", lambda event: friday_L(event, nl_fri_pic))
                 label_friday.bind("<Button-1>", lift_monday)
+
+#All the days will be created as objects here. I will implement that after I finish formatting the grid layout properly        
+class Days_UI:
         
-class Monday_UI:
         
         def __init__(self, root):
-                frame = Frame(root, width=300,height=200)
-                frame.grid(row=0)                
+                              
+                
+                #A ton of stuff that will not be here later 
+                test2 = PhotoImage(file="3.gif")
+        
+                l = Label(root, image= test2 ,borderwidth = 0, highlightthickness= 0)
+                l.image= test2
+                l.grid(row=0)
+                l2 = Label(root, image= test2,borderwidth = 0, highlightthickness= 0)
+                l2.test= test2
+                l2.grid(row=1)
+                l3 = Label(root, image= test2,borderwidth = 0, highlightthickness= 0)
+                l3.test= test2
+                l3.grid(row=2)  
+                l4 = Label(root, image= test2,borderwidth = 0, highlightthickness= 0)
+                l4.test= test2
+                l4.grid(row=3)                
+                
+                
+                time_tuple = ("1 AM","2 AM","3 AM","4 AM","5 AM","6 AM","7 AM","9 AM","10 AM","11 AM","12 AM","1 PM","2 PM","3 PM","4 PM","5 PM","6 PM","7 PM","9 PM","10 PM","11 PM","12 PM")
+                
+                 
+                #Initializing spinners
+                root.geometry("1000x700")
+                self.spinner1 = Spinbox(root, values=time_tuple ,width=5)
+                self.spinner1.grid(row=0,column=2)                  
+                self.spinner2 = Spinbox(root, values=time_tuple,width=5)
+                self.spinner2.grid(row=1,column=2) 
+                self.spinner3 = Spinbox(root, values=time_tuple,width=5)
+                self.spinner3.grid(row=2,column=2)  
+                self.spinner4 = Spinbox(root, values=time_tuple,width=5)
+                self.spinner4.grid(row=3,column=2)                
+                
+                #Initializing text boxes
+                self.entry1 = Entry(root)
+                self.entry1.grid(row=0,column=4)
+                self.entry2 = Entry(root)
+                self.entry2.grid(row=1,column=4)
+                self.entry3 = Entry(root)
+                self.entry3.grid(row=2,column=4)
+                self.entry4 = Entry(root)                
+                self.entry4.grid(row=3,column=4)
+                
+                
+                #Making buttons so you can test the inputs
+                b = Button(root, text="Print Values",command= self.print_values)
+                b.grid(row=0,column=5)
+                b2 = Button(root, text="Set Defaults",command= self.set_values)
+                b2.grid(row=0,column=6)                
+        
+        #Test method to print the values that you inputted.        
+        def print_values(self):
+                self.get_spinner()
+                self.get_text()
+                print self.in_spin1,self.in_spin2,self.in_spin3,self.in_spin4
+                print self.in_textbox1,self.in_textbox2,self.in_textbox3,self.in_textbox4
+        
+        #getting the spinner values
+        def get_spinner(self):
+                self.in_spin1 = self.spinner1.get()
+                self.in_spin2 = self.spinner2.get()
+                self.in_spin3 = self.spinner3.get()
+                self.in_spin4 = self.spinner4.get()
+        
+        #getting the text entries      
+        def get_text(self):
+                self.in_textbox1 = self.entry1.get()
+                self.in_textbox2 = self.entry2.get()
+                self.in_textbox3 = self.entry3.get()
+                self.in_textbox4 = self.entry4.get()
+                
+                
+        def set_values(self):
+                #THIS METHOD WOULD DETERMINE THE STARTING VALUES
+                ##Determine how many current entries there are
+                ##Fill the appropriate values to the text boxes and spinners
+                #This example assumes there is one value saved by the user
+                self.time = "9 AM"                
+                self.url = "https://www.reddit.com/r/todayilearned/"
+                
+                self.spinner1.delete(0,"end")
+                self.spinner1.insert(0,self.time)
+                self.entry1.delete(0,END)
+                self.entry1.insert(0,self.url)
+                
+                
 
+root_main = Tk()
+monday_main = Toplevel(root_main)
 
-
-
-start_main = Tk()
-monday_main = Tk()
-s = Start_UI(start_main)
-m = Monday_UI(monday_main)
-start_main.mainloop()
+s = Start_UI(root_main)
+m = Days_UI(monday_main)
+m.get_spinner()
+root_main.mainloop()
