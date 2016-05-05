@@ -138,8 +138,46 @@ class Days_UI:
                 b = Button(root, text="Print Values",command= self.print_values)
                 b.grid(row=0,column=5)
                 b2 = Button(root, text="Set Defaults",command= self.set_values)
-                b2.grid(row=0,column=6)                
+                b2.grid(row=0,column=6) 
+                #buttons for testing file I/O
+                b3 = Button(root, text="Save Values",command= self.save_values)
+                b3.grid(row=0,column=7)
+                b4 = Button(root, text="Read Values",command= self.read_values)
+                b4.grid(row=0,column=8)                
         
+        #writes the values of all text fields and spinners to a file
+        def save_values(self):
+                self.get_spinner()
+                self.get_text()
+                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4]]               
+                f = open("Example.txt", "w") # Change this so the file is named based on the object
+                for row in li:
+                        for item in row:
+                                f.write(str(item) + "|") # is str(item) necessary?
+                        f.write("\n")
+                f.close()
+                     
+        #reads the values of text values and spinners from a file
+        def read_values(self):
+                f = open("Example.txt", "r") # Change this so the file is named based on the object
+                li = []
+                for line in f:
+                        li.append(line.strip("\n").split("|"))
+                f.close()
+                #remove the empty string at the last index of both rows caused by the last item's pipe
+                for row in li:
+                        row.remove(row[-1])
+                print li 
+                #assign the values back to the object
+                self.in_textbox1 = li[0][0]
+                self.in_textbox2 = li[0][1]
+                self.in_textbox3 = li[0][2]
+                self.in_textbox4 = li[0][3]
+                
+                self.in_spin1 = li[1][0]
+                self.in_spin2 = li[1][1]
+                self.in_spin3 = li[1][2]
+                self.in_spin4 = li[1][3]                        
         #Test method to print the values that you inputted.        
         def print_values(self):
                 self.get_spinner()
@@ -160,27 +198,30 @@ class Days_UI:
                 self.in_textbox2 = self.entry2.get()
                 self.in_textbox3 = self.entry3.get()
                 self.in_textbox4 = self.entry4.get()
-                
-                
+                        
         def set_values(self):
-                #THIS METHOD WOULD DETERMINE THE STARTING VALUES
-                ##Determine how many current entries there are
-                ##Fill the appropriate values to the text boxes and spinners
-                #This example assumes there is one value saved by the user
-                self.time = "9 AM"                
-                self.url = "https://www.reddit.com/r/todayilearned/"
-                
+                #Fills the appropriate values to the text boxes and spinners
                 self.spinner1.delete(0,"end")
-                self.spinner1.insert(0,self.time)
+                self.spinner1.insert(0,self.in_spin1)
                 self.entry1.delete(0,END)
-                self.entry1.insert(0,self.url)
+                self.entry1.insert(0,self.in_textbox1)
+                self.spinner2.delete(0,"end")
+                self.spinner2.insert(0,self.in_spin2)
+                self.entry2.delete(0,END)
+                self.entry2.insert(0,self.in_textbox2)
+                self.spinner3.delete(0,"end")
+                self.spinner3.insert(0,self.in_spin3)
+                self.entry3.delete(0,END)
+                self.entry3.insert(0,self.in_textbox3)      
+                self.spinner4.delete(0,"end")
+                self.spinner4.insert(0,self.in_spin4)
+                self.entry4.delete(0,END)
+                self.entry4.insert(0,self.in_textbox4)                          
                 
-                
-
 root_main = Tk()
 monday_main = Toplevel(root_main)
 
 s = Start_UI(root_main)
 m = Days_UI(monday_main)
-m.get_spinner()
+#m.get_spinner() commented this out for now because it breaks read_values()
 root_main.mainloop()
