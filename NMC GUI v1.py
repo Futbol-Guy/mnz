@@ -41,17 +41,17 @@ class Start_UI:
                 root.title("NMC Scheduler")
                         
                 #Getting the default pictures
-                nl_mon_pic = PhotoImage(file="MS_NL_Mon.gif")
-                nl_tues_pic = PhotoImage(file="MS_NL_Tues.gif")
-                nl_wed_pic = PhotoImage(file="MS_NL_Wed.gif")
-                nl_thurs_pic = PhotoImage(file="MS_NL_Thurs.gif")
-                nl_fri_pic = PhotoImage(file="MS_NL_Fri.gif")
+                nl_mon_pic = PhotoImage(file="Images\MS_NL_Mon.gif")
+                nl_tues_pic = PhotoImage(file="Images\MS_NL_Tues.gif")
+                nl_wed_pic = PhotoImage(file="Images\MS_NL_Wed.gif")
+                nl_thurs_pic = PhotoImage(file="Images\MS_NL_Thurs.gif")
+                nl_fri_pic = PhotoImage(file="Images\MS_NL_Fri.gif")
                 #Lightning Pics
-                l_mon_pic = PhotoImage(file="MS_L_Mon.gif")
-                l_tues_pic = PhotoImage(file="MS_L_Tues.gif")
-                l_wed_pic = PhotoImage(file="MS_L_Wed.gif")
-                l_thurs_pic = PhotoImage(file="MS_L_Thurs.gif")
-                l_fri_pic = PhotoImage(file="MS_L_Fri.gif")
+                l_mon_pic = PhotoImage(file="Images\MS_L_Mon.gif")
+                l_tues_pic = PhotoImage(file="Images\MS_L_Tues.gif")
+                l_wed_pic = PhotoImage(file="Images\MS_L_Wed.gif")
+                l_thurs_pic = PhotoImage(file="Images\MS_L_Thurs.gif")
+                l_fri_pic = PhotoImage(file="Images\MS_L_Fri.gif")
                 
                 #creating a label for each image        
                 label_monday = Label(root, image= nl_mon_pic, borderwidth = 0, highlightthickness= 0)
