@@ -13,31 +13,11 @@
 
 from Tkinter import *
 from PIL import ImageTk, Image
-import tkFont
-import webbrowser
-import schedule
-import time
-import sys
-import subprocess
-
-def centre_screen(root):
-        # get screen width and height
-        ws = root.winfo_screenwidth()
-        hs = root.winfo_screenheight() 
-        
-        # calculate x and y coordinates for the Tk root window
-        x = (ws/2) - (500)
-        y = (hs/2) - (350)
-        
-        root.geometry('%dx%d+%d+%d' % (1000, 700, x, y))        
 
 class Start_UI:
                                 
                 
         def __init__(self, root):
-                root.maxsize(width=1000,height=700)
-                root.minsize(width=1000,height=700)
-                centre_screen(root)
                 
                 #creating methods to change the image when the mouse hovers over
                 def monday_L(event, pic):
@@ -56,31 +36,11 @@ class Start_UI:
                         label_friday.config(image= pic)                
                 
                 def lift_monday(event):
-                        image= PhotoImage(file="Images\Mon Art.gif")
+                        #monday_main.lift()
                         monday_main = Toplevel(root_main)
-                        m = Days_UI(monday_main,image)
-                
-                def lift_tuesday(event):                       
-                        image= PhotoImage(file="Images\Tues Art.gif")
-                        monday_main = Toplevel(root_main)
-                        m = Days_UI(monday_main, image)
-                
-                def lift_wednesday(event):                       
-                        image= PhotoImage(file="Images\Wed Art.gif")
-                        monday_main = Toplevel(root_main)
-                        m = Days_UI(monday_main, image)
-                
-                def lift_thursday(event):                       
-                        image= PhotoImage(file="Images\Thurs Art.gif")
-                        monday_main = Toplevel(root_main)
-                        m = Days_UI(monday_main, image)
-                
-                def lift_friday(event):                       
-                        image= PhotoImage(file="Images\Fri Art.gif")
-                        monday_main = Toplevel(root_main)
-                        m = Days_UI(monday_main, image)                
+                        m = Days_UI(monday_main)
                         
-                root.title("Never Miss A Class")
+                root.title("NMC Scheduler")
                         
                 #Getting the default pictures
                 nl_mon_pic = PhotoImage(file="Images\MS_NL_Mon.gif")
@@ -89,7 +49,7 @@ class Start_UI:
                 nl_thurs_pic = PhotoImage(file="Images\MS_NL_Thurs.gif")
                 nl_fri_pic = PhotoImage(file="Images\MS_NL_Fri.gif")
                 #Lightning Pics
-                l_mon_pic = PhotoImage(file="Images\MS_L_Mon.gif")    
+                l_mon_pic = PhotoImage(file="Images\MS_L_Mon.gif")
                 l_tues_pic = PhotoImage(file="Images\MS_L_Tues.gif")
                 l_wed_pic = PhotoImage(file="Images\MS_L_Wed.gif")
                 l_thurs_pic = PhotoImage(file="Images\MS_L_Thurs.gif")
@@ -102,116 +62,91 @@ class Start_UI:
                 label_monday.bind("<Enter>", lambda event: monday_L(event, l_mon_pic))
                 label_monday.bind("<Leave>", lambda event: monday_L(event, nl_mon_pic))
                 label_monday.bind("<Button-1>", lift_monday)
-                #schedule.every().monday.at("11:16").do(webbrowser.open("www.virtuallearning.ca"))
                         
                 label_tuesday = Label(root, image= nl_tues_pic, borderwidth = 0, highlightthickness= 0)
                 label_tuesday.grid(row=0, column= 1)
                 label_tuesday.bind("<Enter>", lambda event: tuesday_L(event, l_tues_pic))
                 label_tuesday.bind("<Leave>", lambda event: tuesday_L(event, nl_tues_pic))
-                label_tuesday.bind("<Button-1>", lift_tuesday)
+                label_tuesday.bind("<Button-1>", lift_monday)
                         
                 label_wednesday = Label(root, image= nl_wed_pic, borderwidth = 0, highlightthickness= 0)
                 label_wednesday.grid(row=0, column= 2)
                 label_wednesday.bind("<Enter>", lambda event: wednesday_L(event, l_wed_pic))
                 label_wednesday.bind("<Leave>", lambda event: wednesday_L(event, nl_wed_pic))
-                label_wednesday.bind("<Button-1>", lift_wednesday)
+                label_wednesday.bind("<Button-1>", lift_monday)
                         
                 label_thursday = Label(root, image= nl_thurs_pic, borderwidth = 0, highlightthickness= 0)
                 label_thursday.grid(row=0, column= 3)
                 label_thursday.bind("<Enter>", lambda event: thursday_L(event, l_thurs_pic))
                 label_thursday.bind("<Leave>", lambda event: thursday_L(event, nl_thurs_pic))
-                label_thursday.bind("<Button-1>", lift_thursday)
+                label_thursday.bind("<Button-1>", lift_monday)
                         
                 label_friday = Label(root, image= nl_fri_pic, borderwidth = 0, highlightthickness= 0)
                 label_friday.grid(row=0, column= 4)
                 label_friday.bind("<Enter>", lambda event: friday_L(event, l_fri_pic))
                 label_friday.bind("<Leave>", lambda event: friday_L(event, nl_fri_pic))
-                label_friday.bind("<Button-1>", lift_friday)
-                
-                
-
-
+                label_friday.bind("<Button-1>", lift_monday)
 
 #All the days will be created as objects here. I will implement that after I finish formatting the grid layout properly        
 class Days_UI:
         
+        
+        def __init__(self, root):
+                              
+                root.title("Monday")
+                #A ton of stuff that will not be here later 
+                test2 = PhotoImage(file="Images\3.gif")
+        
+                l = Label(root, image= test2 ,borderwidth = 0, highlightthickness= 0)
+                l.image= test2
+                l.grid(row=0)
+                l2 = Label(root, image= test2,borderwidth = 0, highlightthickness= 0)
+                l2.test= test2
+                l2.grid(row=1)
+                l3 = Label(root, image= test2,borderwidth = 0, highlightthickness= 0)
+                l3.test= test2
+                l3.grid(row=2)  
+                l4 = Label(root, image= test2,borderwidth = 0, highlightthickness= 0)
+                l4.test= test2
+                l4.grid(row=3)                
                 
-        def __init__(self, root,bg_image):
-                #webbrowser.open("www.virtuallearning.ca")  
-                centre_screen(root)
-                root.title("Never Miss A Class")
-                root.maxsize(width=1000,height=700)
-                root.minsize(width=1000,height=700)
                 
-                #setting a font
-                helv36 = tkFont.Font(family='Helvetica',
-                size=36, weight='bold')  
-                
-                
-                
-                self.main_canvas = Canvas(root,width=1000,height=700, highlightthickness=0)
-                self.main_canvas.grid(row=0, column=0)
-                
-                self.main_canvas.create_image(0,0,anchor=NW, image=bg_image)
-                self.main_canvas.image=bg_image              
-                     
-                        
                 time_tuple = ("1 AM","2 AM","3 AM","4 AM","5 AM","6 AM","7 AM","9 AM","10 AM","11 AM","12 AM","1 PM","2 PM","3 PM","4 PM","5 PM","6 PM","7 PM","9 PM","10 PM","11 PM","12 PM")
                 
-                #Placing the buttons.
-                                
-                self.default_button = Button(self.main_canvas, text="Set Defaults",command= self.set_values)
-                self.default_button.place(x=250,y=550)
-                self.save_button = Button(self.main_canvas, text="Save Values",command= self.save_values)
-                self.save_button.place(x=350,y=550)
-                self.read_button = Button(self.main_canvas, text="Read Values",command= self.read_values)
-                self.read_button.place(x=450,y=550)
-                self.home_button = Button(self.main_canvas, text="Back to Home Screen",command= self.lift_main(root))
-                self.home_button.place(x=600,y=550)                
-                
-                #Creting the text
-                self.main_canvas.create_text(80,80, text = "Enter the time, name and URL of each class. Then click 'Save Changes'. ",anchor=NW,font='helv36')
-                self.main_canvas.create_text(250,200, text = "Class 1",anchor=NW,font='helv36')  
-                self.main_canvas.create_text(250,250, text = "Class 2",anchor=NW,font='helv36')
-                self.main_canvas.create_text(250,300, text = "Class 3",anchor=NW,font='helv36')
-                self.main_canvas.create_text(250,350, text = "Class 4",anchor=NW,font='helv36')
-                self.main_canvas.create_text(250,400, text = "Class 5",anchor=NW,font='helv36')
-                self.main_canvas.create_text(250,450, text = "Class 6",anchor=NW,font='helv36')
-                
+                 
                 #Initializing spinners
-                
-                self.spinner1 = Spinbox(self.main_canvas, values=time_tuple ,width=5)
-                self.spinner1.place(x=350,y=200)                  
-                self.spinner2 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner2.place(x=350,y=250) 
-                self.spinner3 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner3.place(x=350,y=300)   
-                self.spinner4 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner4.place(x=350,y=350) 
-                self.spinner5 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner5.place(x=350,y=400)   
-                self.spinner6 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner6.place(x=350,y=450)                 
+                root.geometry("1000x700")
+                self.spinner1 = Spinbox(root, values=time_tuple ,width=5)
+                self.spinner1.grid(row=0,column=2)                  
+                self.spinner2 = Spinbox(root, values=time_tuple,width=5)
+                self.spinner2.grid(row=1,column=2) 
+                self.spinner3 = Spinbox(root, values=time_tuple,width=5)
+                self.spinner3.grid(row=2,column=2)  
+                self.spinner4 = Spinbox(root, values=time_tuple,width=5)
+                self.spinner4.grid(row=3,column=2)                
                 
                 #Initializing text boxes
-                self.entry1 = Entry(self.main_canvas,width = 30)
-                self.entry1.place(x=400,y=200)
-                self.entry2 = Entry(self.main_canvas,width = 30)
-                self.entry2.place(x=400,y=250)
-                self.entry3 = Entry(self.main_canvas,width = 30)
-                self.entry3.place(x=400,y=300)
-                self.entry4 = Entry(self.main_canvas,width = 30)                
-                self.entry4.place(x=400,y=350)
-                self.entry5 = Entry(self.main_canvas,width = 30)
-                self.entry5.place(x=400,y=400)
-                self.entry6 = Entry(self.main_canvas,width = 30)                
-                self.entry6.place(x=400,y=450)                
+                self.entry1 = Entry(root)
+                self.entry1.grid(row=0,column=4)
+                self.entry2 = Entry(root)
+                self.entry2.grid(row=1,column=4)
+                self.entry3 = Entry(root)
+                self.entry3.grid(row=2,column=4)
+                self.entry4 = Entry(root)                
+                self.entry4.grid(row=3,column=4)
                 
-                                
+                
+                #Making buttons so you can test the inputs
+                b = Button(root, text="Print Values",command= self.print_values)
+                b.grid(row=0,column=5)
+                b2 = Button(root, text="Set Defaults",command= self.set_values)
+                b2.grid(row=0,column=6) 
+                #buttons for testing file I/O
+                b3 = Button(root, text="Save Values",command= self.save_values)
+                b3.grid(row=0,column=7)
+                b4 = Button(root, text="Read Values",command= self.read_values)
+                b4.grid(row=0,column=8)                
         
-        def lift_main(self,root):
-                root.attributes("-topmost", True)
-                
         #writes the values of all text fields and spinners to a file
         def save_values(self):
                 self.get_spinner()
