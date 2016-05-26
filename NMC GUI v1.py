@@ -59,6 +59,7 @@ class Start_UI:
                         image= PhotoImage(file="Images\Mon Art.gif")
                         monday_main = Toplevel(root_main)
                         m = Days_UI(monday_main,image)
+                        m.name = "Monday" 
                 
                 def lift_tuesday(event):                       
                         image= PhotoImage(file="Images\Tues Art.gif")
@@ -216,8 +217,9 @@ class Days_UI:
         def save_values(self):
                 self.get_spinner()
                 self.get_text()
-                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4]]               
-                f = open("Example.txt", "w") # Change this so the file is named based on the object
+                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], 
+                      [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6]]               
+                f = open(self.name + ".txt", "w") # Change this so the file is named based on the object
                 for row in li:
                         for item in row:
                                 f.write(str(item) + "|") # is str(item) necessary?
@@ -226,7 +228,7 @@ class Days_UI:
                      
         #reads the values of text values and spinners from a file
         def read_values(self):
-                f = open("Example.txt", "r") # Change this so the file is named based on the object
+                f = open(self.name + ".txt", "r") # Change this so the file is named based on the object
                 li = []
                 for line in f:
                         li.append(line.strip("\n").split("|"))
@@ -240,11 +242,16 @@ class Days_UI:
                 self.in_textbox2 = li[0][1]
                 self.in_textbox3 = li[0][2]
                 self.in_textbox4 = li[0][3]
+                self.in_textbox5 = li[0][4]
+                self.in_textbox6 = li[0][5]
                 
                 self.in_spin1 = li[1][0]
                 self.in_spin2 = li[1][1]
                 self.in_spin3 = li[1][2]
-                self.in_spin4 = li[1][3]                        
+                self.in_spin4 = li[1][3]
+                self.in_spin5 = li[1][4]
+                self.in_spin6 = li[1][5]
+                
         #Test method to print the values that you inputted.        
         def print_values(self):
                 self.get_spinner()
@@ -258,6 +265,8 @@ class Days_UI:
                 self.in_spin2 = self.spinner2.get()
                 self.in_spin3 = self.spinner3.get()
                 self.in_spin4 = self.spinner4.get()
+                self.in_spin5 = self.spinner5.get()
+                self.in_spin6 = self.spinner6.get()
         
         #getting the text entries      
         def get_text(self):
@@ -265,6 +274,8 @@ class Days_UI:
                 self.in_textbox2 = self.entry2.get()
                 self.in_textbox3 = self.entry3.get()
                 self.in_textbox4 = self.entry4.get()
+                self.in_textbox5 = self.entry5.get()
+                self.in_textbox6 = self.entry6.get()
                         
         def set_values(self):
                 #Fills the appropriate values to the text boxes and spinners
@@ -283,7 +294,15 @@ class Days_UI:
                 self.spinner4.delete(0,"end")
                 self.spinner4.insert(0,self.in_spin4)
                 self.entry4.delete(0,END)
-                self.entry4.insert(0,self.in_textbox4)                          
+                self.entry4.insert(0,self.in_textbox4)
+                self.spinner5.delete(0,"end")
+                self.spinner5.insert(0,self.in_spin5)
+                self.entry5.delete(0,END)
+                self.entry5.insert(0,self.in_textbox5)  
+                self.spinner6.delete(0,"end")
+                self.spinner6.insert(0,self.in_spin6)
+                self.entry6.delete(0,END)
+                self.entry6.insert(0,self.in_textbox6)                   
                 
 root_main = Tk()
 
