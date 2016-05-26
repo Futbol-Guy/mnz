@@ -59,6 +59,7 @@ class Start_UI:
                         image= PhotoImage(file="Images\Mon Art.gif")
                         monday_main = Toplevel(root_main)
                         m = Days_UI(monday_main,image)
+                        m.name = "Monday" 
                 
                 def lift_tuesday(event):                       
                         image= PhotoImage(file="Images\Tues Art.gif")
@@ -213,13 +214,19 @@ class Days_UI:
                 self.get_spinner()
                 self.get_text()
                 li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4,self.in_textbox5,self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4,self.in_spin5,self.in_spin6]]               
-                f = open("Example.txt", "w") # Change this so the file is named based on the object
+                      [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6]]               
+                f = open(self.name + ".txt", "w") # Change this so the file is named based on the object
                 for row in li:
                         for item in row:
                                 f.write(str(item) + "|") # is str(item) necessary?
                         f.write("\n")
                 f.close()
                      
+                self.in_textbox5 = li[0][4]
+                self.in_textbox6 = li[0][5]
+                self.in_spin5 = li[1][4]
+                self.in_spin6 = li[1][5]
+                
         #Test method to print the values that you inputted.        
         def print_values(self):
                 self.get_spinner()
