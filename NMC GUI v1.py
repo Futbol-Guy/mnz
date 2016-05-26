@@ -131,6 +131,7 @@ class Start_UI:
                 
 
 
+                        
 
 #All the days will be created as objects here. I will implement that after I finish formatting the grid layout properly        
 class Days_UI:
@@ -144,8 +145,7 @@ class Days_UI:
                 root.minsize(width=1000,height=700)
                 
                 #setting a font
-                helv36 = tkFont.Font(family='Helvetica',
-                size=36, weight='bold')  
+                helv36 = tkFont.Font(family='Helvetica',size=36, weight='bold')  
                 
                 
                 
@@ -160,13 +160,11 @@ class Days_UI:
                 
                 #Placing the buttons.
                                 
-                self.default_button = Button(self.main_canvas, text="Set Defaults",command= self.set_values)
+                self.default_button = Button(self.main_canvas, text="Reset to Defaults",command= self.set_values)
                 self.default_button.place(x=250,y=550)
-                self.save_button = Button(self.main_canvas, text="Save Values",command= self.save_values)
-                self.save_button.place(x=350,y=550)
-                self.read_button = Button(self.main_canvas, text="Read Values",command= self.read_values)
-                self.read_button.place(x=450,y=550)
-                self.home_button = Button(self.main_canvas, text="Back to Home Screen",command= self.lift_main(root))
+                self.save_button = Button(self.main_canvas, text="Save Changes",command= self.save_values)
+                self.save_button.place(x=400,y=550)
+                self.home_button = Button(self.main_canvas, text="Back to Home Screen",command= root.destroy)
                 self.home_button.place(x=600,y=550)                
                 
                 #Creting the text
@@ -209,14 +207,12 @@ class Days_UI:
                 
                                 
         
-        def lift_main(self,root):
-                root.attributes("-topmost", True)
                 
         #writes the values of all text fields and spinners to a file
         def save_values(self):
                 self.get_spinner()
                 self.get_text()
-                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4]]               
+                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4,self.in_textbox5,self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4,self.in_spin5,self.in_spin6]]               
                 f = open("Example.txt", "w") # Change this so the file is named based on the object
                 for row in li:
                         for item in row:
@@ -224,8 +220,33 @@ class Days_UI:
                         f.write("\n")
                 f.close()
                      
-        #reads the values of text values and spinners from a file
-        def read_values(self):
+        #Test method to print the values that you inputted.        
+        def print_values(self):
+                self.get_spinner()
+                self.get_text()
+                print self.in_spin1,self.in_spin2,self.in_spin3,self.in_spin4
+                print self.in_textbox1,self.in_textbox2,self.in_textbox3,self.in_textbox4
+        
+        #getting the spinner values
+        def get_spinner(self):
+                self.in_spin1 = self.spinner1.get()
+                self.in_spin2 = self.spinner2.get()
+                self.in_spin3 = self.spinner3.get()
+                self.in_spin4 = self.spinner4.get()
+                self.in_spin5 = self.spinner5.get()
+                self.in_spin6 = self.spinner6.get()                
+        
+        #getting the text entries      
+        def get_text(self):
+                self.in_textbox1 = self.entry1.get()
+                self.in_textbox2 = self.entry2.get()
+                self.in_textbox3 = self.entry3.get()
+                self.in_textbox4 = self.entry4.get()
+                self.in_textbox5 = self.entry5.get()
+                self.in_textbox6 = self.entry6.get()                
+                        
+        def set_values(self):
+                #Reading the values from the text file
                 f = open("Example.txt", "r") # Change this so the file is named based on the object
                 li = []
                 for line in f:
@@ -240,33 +261,16 @@ class Days_UI:
                 self.in_textbox2 = li[0][1]
                 self.in_textbox3 = li[0][2]
                 self.in_textbox4 = li[0][3]
+                self.in_textbox5 = li[0][4]
+                self.in_textbox6 = li[0][5]                
                 
                 self.in_spin1 = li[1][0]
                 self.in_spin2 = li[1][1]
                 self.in_spin3 = li[1][2]
-                self.in_spin4 = li[1][3]                        
-        #Test method to print the values that you inputted.        
-        def print_values(self):
-                self.get_spinner()
-                self.get_text()
-                print self.in_spin1,self.in_spin2,self.in_spin3,self.in_spin4
-                print self.in_textbox1,self.in_textbox2,self.in_textbox3,self.in_textbox4
-        
-        #getting the spinner values
-        def get_spinner(self):
-                self.in_spin1 = self.spinner1.get()
-                self.in_spin2 = self.spinner2.get()
-                self.in_spin3 = self.spinner3.get()
-                self.in_spin4 = self.spinner4.get()
-        
-        #getting the text entries      
-        def get_text(self):
-                self.in_textbox1 = self.entry1.get()
-                self.in_textbox2 = self.entry2.get()
-                self.in_textbox3 = self.entry3.get()
-                self.in_textbox4 = self.entry4.get()
-                        
-        def set_values(self):
+                self.in_spin4 = li[1][3]   
+                self.in_spin5 = li[1][4]
+                self.in_spin6 = li[1][5] 
+                                
                 #Fills the appropriate values to the text boxes and spinners
                 self.spinner1.delete(0,"end")
                 self.spinner1.insert(0,self.in_spin1)
@@ -283,7 +287,15 @@ class Days_UI:
                 self.spinner4.delete(0,"end")
                 self.spinner4.insert(0,self.in_spin4)
                 self.entry4.delete(0,END)
-                self.entry4.insert(0,self.in_textbox4)                          
+                self.entry4.insert(0,self.in_textbox4)
+                self.spinner5.delete(0,"end")
+                self.spinner5.insert(0,self.in_spin5)
+                self.entry5.delete(0,END)
+                self.entry5.insert(0,self.in_textbox5)      
+                self.spinner6.delete(0,"end")
+                self.spinner6.insert(0,self.in_spin6)
+                self.entry6.delete(0,END)
+                self.entry6.insert(0,self.in_textbox6)                   
                 
 root_main = Tk()
 
