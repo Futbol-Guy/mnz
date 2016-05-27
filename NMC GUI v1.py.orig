@@ -57,28 +57,29 @@ class Start_UI:
                 
                 def lift_monday(event):
                         image= PhotoImage(file="Images\Mon Art.gif")
-                        main = Toplevel(root_main)
-                        m = Days_UI(main,image,"Monday")
+                        monday_main = Toplevel(root_main)
+                        m = Days_UI(monday_main,image)
+                        m.name = "Monday" 
                 
                 def lift_tuesday(event):                       
                         image= PhotoImage(file="Images\Tues Art.gif")
-                        main = Toplevel(root_main)
-                        t = Days_UI(main, image,"Tuesday")
+                        monday_main = Toplevel(root_main)
+                        m = Days_UI(monday_main, image)
                 
                 def lift_wednesday(event):                       
                         image= PhotoImage(file="Images\Wed Art.gif")
-                        main = Toplevel(root_main)
-                        w = Days_UI(main, image,"Wednesday")
+                        monday_main = Toplevel(root_main)
+                        m = Days_UI(monday_main, image)
                 
                 def lift_thursday(event):                       
                         image= PhotoImage(file="Images\Thurs Art.gif")
-                        main = Toplevel(root_main)
-                        th = Days_UI(main, image,"Thursday")
+                        monday_main = Toplevel(root_main)
+                        m = Days_UI(monday_main, image)
                 
                 def lift_friday(event):                       
                         image= PhotoImage(file="Images\Fri Art.gif")
-                        main = Toplevel(root_main)
-                        f = Days_UI(main, image,"Friday")
+                        monday_main = Toplevel(root_main)
+                        m = Days_UI(monday_main, image)                
                         
                 root.title("Never Miss A Class")
                         
@@ -137,17 +138,16 @@ class Start_UI:
 class Days_UI:
         
                 
-        def __init__(self, root,bg_image,name):
+        def __init__(self, root,bg_image):
                 #webbrowser.open("www.virtuallearning.ca")  
-                self.name = name
                 centre_screen(root)
                 root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)
                 
                 #setting a font
-                customFont = tkFont.Font(family="Minecraft", size=14)
-                customFont_small = tkFont.Font(family="Minecraft", size=10)
+                helv36 = tkFont.Font(family='Helvetica',size=36, weight='bold')  
+                
                 
                 
                 self.main_canvas = Canvas(root,width=1000,height=700, highlightthickness=0)
@@ -161,21 +161,21 @@ class Days_UI:
                 
                 #Placing the buttons.
                                 
-                self.default_button = Button(self.main_canvas, text="Reset to Defaults",command= self.set_values,font=customFont_small)
+                self.default_button = Button(self.main_canvas, text="Reset to Defaults",command= self.set_values)
                 self.default_button.place(x=250,y=550)
-                self.save_button = Button(self.main_canvas, text="Save Changes",command= self.save_values,font=customFont_small)
+                self.save_button = Button(self.main_canvas, text="Save Changes",command= self.save_values)
                 self.save_button.place(x=400,y=550)
-                self.home_button = Button(self.main_canvas, text="Back to Home Screen",command= root.destroy,font=customFont_small)
+                self.home_button = Button(self.main_canvas, text="Back to Home Screen",command= root.destroy)
                 self.home_button.place(x=600,y=550)                
                 
                 #Creting the text
-                self.main_canvas.create_text(150,150, text = "Enter the time, name and URL of each class. Then click 'Save Changes'. ",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,200, text = "Class 1",anchor=NW,font=customFont)  
-                self.main_canvas.create_text(250,250, text = "Class 2",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,300, text = "Class 3",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,350, text = "Class 4",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,400, text = "Class 5",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,450, text = "Class 6",anchor=NW,font=customFont)
+                self.main_canvas.create_text(80,80, text = "Enter the time, name and URL of each class. Then click 'Save Changes'. ",anchor=NW,font='helv36')
+                self.main_canvas.create_text(250,200, text = "Class 1",anchor=NW,font='helv36')  
+                self.main_canvas.create_text(250,250, text = "Class 2",anchor=NW,font='helv36')
+                self.main_canvas.create_text(250,300, text = "Class 3",anchor=NW,font='helv36')
+                self.main_canvas.create_text(250,350, text = "Class 4",anchor=NW,font='helv36')
+                self.main_canvas.create_text(250,400, text = "Class 5",anchor=NW,font='helv36')
+                self.main_canvas.create_text(250,450, text = "Class 6",anchor=NW,font='helv36')
                 
                 #Initializing spinners
                 
@@ -204,8 +204,7 @@ class Days_UI:
                 self.entry5 = Entry(self.main_canvas,width = 30)
                 self.entry5.place(x=400,y=400)
                 self.entry6 = Entry(self.main_canvas,width = 30)                
-                self.entry6.place(x=400,y=450)
-                self.set_values()
+                self.entry6.place(x=400,y=450)                
                 
                                 
         
@@ -214,19 +213,27 @@ class Days_UI:
         def save_values(self):
                 self.get_spinner()
                 self.get_text()
-                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6]]               
-              
+<<<<<<< local
+                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4,self.in_textbox5,self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4,self.in_spin5,self.in_spin6]]               
+                f = open("Example.txt", "w") # Change this so the file is named based on the object
+=======
+                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], 
+                      [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6]]               
                 f = open(self.name + ".txt", "w") # Change this so the file is named based on the object
+>>>>>>> other
                 for row in li:
                         for item in row:
                                 f.write(str(item) + "|") # is str(item) necessary?
                         f.write("\n")
                 f.close()
                      
-                self.in_textbox5 = li[0][4]
-                self.in_textbox6 = li[0][5]
-                self.in_spin5 = li[1][4]
-                self.in_spin6 = li[1][5]
+<<<<<<< local
+        #Test method to print the values that you inputted.        
+        def print_values(self):
+                self.get_spinner()
+                self.get_text()
+                print self.in_spin1,self.in_spin2,self.in_spin3,self.in_spin4
+                print self.in_textbox1,self.in_textbox2,self.in_textbox3,self.in_textbox4
         
         #getting the spinner values
         def get_spinner(self):
@@ -248,7 +255,12 @@ class Days_UI:
                         
         def set_values(self):
                 #Reading the values from the text file
+                f = open("Example.txt", "r") # Change this so the file is named based on the object
+=======
+        #reads the values of text values and spinners from a file
+        def read_values(self):
                 f = open(self.name + ".txt", "r") # Change this so the file is named based on the object
+>>>>>>> other
                 li = []
                 for line in f:
                         li.append(line.strip("\n").split("|"))
@@ -256,22 +268,60 @@ class Days_UI:
                 #remove the empty string at the last index of both rows caused by the last item's pipe
                 for row in li:
                         row.remove(row[-1])
-                        
+                print li 
                 #assign the values back to the object
                 self.in_textbox1 = li[0][0]
                 self.in_textbox2 = li[0][1]
                 self.in_textbox3 = li[0][2]
                 self.in_textbox4 = li[0][3]
+<<<<<<< local
                 self.in_textbox5 = li[0][4]
                 self.in_textbox6 = li[0][5]                
+=======
+                self.in_textbox5 = li[0][4]
+                self.in_textbox6 = li[0][5]
+>>>>>>> other
                 
                 self.in_spin1 = li[1][0]
                 self.in_spin2 = li[1][1]
                 self.in_spin3 = li[1][2]
+<<<<<<< local
                 self.in_spin4 = li[1][3]   
                 self.in_spin5 = li[1][4]
                 self.in_spin6 = li[1][5] 
                                 
+=======
+                self.in_spin4 = li[1][3]
+                self.in_spin5 = li[1][4]
+                self.in_spin6 = li[1][5]
+                
+        #Test method to print the values that you inputted.        
+        def print_values(self):
+                self.get_spinner()
+                self.get_text()
+                print self.in_spin1,self.in_spin2,self.in_spin3,self.in_spin4
+                print self.in_textbox1,self.in_textbox2,self.in_textbox3,self.in_textbox4
+        
+        #getting the spinner values
+        def get_spinner(self):
+                self.in_spin1 = self.spinner1.get()
+                self.in_spin2 = self.spinner2.get()
+                self.in_spin3 = self.spinner3.get()
+                self.in_spin4 = self.spinner4.get()
+                self.in_spin5 = self.spinner5.get()
+                self.in_spin6 = self.spinner6.get()
+        
+        #getting the text entries      
+        def get_text(self):
+                self.in_textbox1 = self.entry1.get()
+                self.in_textbox2 = self.entry2.get()
+                self.in_textbox3 = self.entry3.get()
+                self.in_textbox4 = self.entry4.get()
+                self.in_textbox5 = self.entry5.get()
+                self.in_textbox6 = self.entry6.get()
+                        
+        def set_values(self):
+>>>>>>> other
                 #Fills the appropriate values to the text boxes and spinners
                 self.spinner1.delete(0,"end")
                 self.spinner1.insert(0,self.in_spin1)
@@ -288,6 +338,7 @@ class Days_UI:
                 self.spinner4.delete(0,"end")
                 self.spinner4.insert(0,self.in_spin4)
                 self.entry4.delete(0,END)
+<<<<<<< local
                 self.entry4.insert(0,self.in_textbox4)
                 self.spinner5.delete(0,"end")
                 self.spinner5.insert(0,self.in_spin5)
@@ -297,6 +348,17 @@ class Days_UI:
                 self.spinner6.insert(0,self.in_spin6)
                 self.entry6.delete(0,END)
                 self.entry6.insert(0,self.in_textbox6)                   
+=======
+                self.entry4.insert(0,self.in_textbox4)
+                self.spinner5.delete(0,"end")
+                self.spinner5.insert(0,self.in_spin5)
+                self.entry5.delete(0,END)
+                self.entry5.insert(0,self.in_textbox5)  
+                self.spinner6.delete(0,"end")
+                self.spinner6.insert(0,self.in_spin6)
+                self.entry6.delete(0,END)
+                self.entry6.insert(0,self.in_textbox6)                   
+>>>>>>> other
                 
 root_main = Tk()
 
