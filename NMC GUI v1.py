@@ -17,6 +17,7 @@ import tkFont
 import webbrowser
 import schedule
 import time
+import datetime
 import sys
 import subprocess
 
@@ -296,8 +297,32 @@ class Days_UI:
                 self.spinner6.delete(0,"end")
                 self.spinner6.insert(0,self.in_spin6)
                 self.entry6.delete(0,END)
-                self.entry6.insert(0,self.in_textbox6)                   
+                self.entry6.insert(0,self.in_textbox6)
                 
+        def pending_class():
+                return class_url
+                
+        def pending_time():
+                return class_time
+
+# returns the current time in 24 hr format
+def current_time():
+        now = datetime.datetime.now()
+        time = "%02d:%02d" % (now.hour, now.minute)
+        return time
+
+# converts time from 12 hr format to 24 hr format
+def time_convert(x):
+        time = "0:00" # default value to prevent crashing
+        if "AM" in x:
+                time = x.strip(" AM") + ":00"
+        if "PM" in x:
+                time = str(int(x.strip(" PM")) + 12) + ":00"
+                #if the time is midnight, then return 0:00 instead of 24:00
+                if time == "24:00":
+                        return "0:00"
+        return time
+
 root_main = Tk()
 
 s = Start_UI(root_main)
