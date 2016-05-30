@@ -207,7 +207,6 @@ class Days_UI:
                 self.entry5.place(x=400,y=400)
                 self.entry6 = Entry(self.main_canvas,width = 30)                
                 self.entry6.place(x=400,y=450)                 
-                self.set_values()
                 
                                
         
@@ -228,23 +227,14 @@ class Days_UI:
                 
                 self.class_name_button = Button(self.main_canvas, text="Save Name Changes",command= self.save_names,font=self.customFont_small)
                 self.class_name_button.place(x=250,y=550) 
-      
-        def save_names(self):
-                self.entry7.destroy()
-                self.entry8.destroy()
-                self.entry9.destroy()
-                self.entry10.destroy()
-                self.entry11.destroy()
-                self.entry12.destroy()
-                self.class_name_button.destroy()
                 
         #writes the values of all text fields and spinners to a file
         def save_values(self):
                 self.get_spinner()
                 self.get_text()
-                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6]]               
+                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6], [self.name1, self.name2,self.name3,self.name4,self.name5,self.name6]]              
               
-                f = open(self.name + ".txt", "w") # Change this so the file is named based on the object
+                f = open(self.name + ".txt", "w")
                 for row in li:
                         for item in row:
                                 f.write(str(item) + "|") # is str(item) necessary?
@@ -255,6 +245,18 @@ class Days_UI:
                 self.in_textbox6 = li[0][5]
                 self.in_spin5 = li[1][4]
                 self.in_spin6 = li[1][5]
+                
+        def save_names(self):
+                self.get_names()
+                self.save_values()
+                
+                self.entry7.destroy()
+                self.entry8.destroy()
+                self.entry9.destroy()
+                self.entry10.destroy()
+                self.entry11.destroy()
+                self.entry12.destroy()
+                self.class_name_button.destroy()        
         
         #getting the spinner values
         def get_spinner(self):
@@ -272,11 +274,19 @@ class Days_UI:
                 self.in_textbox3 = self.entry3.get()
                 self.in_textbox4 = self.entry4.get()
                 self.in_textbox5 = self.entry5.get()
-                self.in_textbox6 = self.entry6.get()                
+                self.in_textbox6 = self.entry6.get() 
+                
+        def get_names(self):
+                self.name1 = self.entry7.get()
+                self.name2 = self.entry8.get()
+                self.name3 = self.entry9.get()
+                self.name4 = self.entry10.get()
+                self.name5 = self.entry11.get()
+                self.name6 = self.entry12.get()
                         
         def set_values(self):
                 #Reading the values from the text file
-                f = open(self.name + ".txt", "r") # Change this so the file is named based on the object
+                f = open(self.name + ".txt", "r")
                 li = []
                 for line in f:
                         li.append(line.strip("\n").split("|"))
@@ -298,7 +308,14 @@ class Days_UI:
                 self.in_spin3 = li[1][2]
                 self.in_spin4 = li[1][3]   
                 self.in_spin5 = li[1][4]
-                self.in_spin6 = li[1][5] 
+                self.in_spin6 = li[1][5]
+                
+                self.name1 = li[2][0]
+                self.name2 = li[2][1]
+                self.name3 = li[2][2]
+                self.name4 = li[2][3]   
+                self.name5 = li[2][4]
+                self.name6 = li[2][5]                
                                 
                 #Fills the appropriate values to the text boxes and spinners
                 self.spinner1.delete(0,"end")
