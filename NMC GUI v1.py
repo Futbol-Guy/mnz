@@ -147,8 +147,8 @@ class Days_UI:
                 root.minsize(width=1000,height=700)
                 
                 #setting a font
-                customFont = tkFont.Font(family="Minecraft", size=14)
-                customFont_small = tkFont.Font(family="Minecraft", size=10)
+                self.customFont = tkFont.Font(family="Minecraft", size=14)
+                self.customFont_small = tkFont.Font(family="Minecraft", size=10)
                 
                 
                 self.main_canvas = Canvas(root,width=1000,height=700, highlightthickness=0)
@@ -161,22 +161,23 @@ class Days_UI:
                 time_tuple = ("1 AM","2 AM","3 AM","4 AM","5 AM","6 AM","7 AM","9 AM","10 AM","11 AM","12 AM","1 PM","2 PM","3 PM","4 PM","5 PM","6 PM","7 PM","9 PM","10 PM","11 PM","12 PM")
                 
                 #Placing the buttons.
-                                
-                self.default_button = Button(self.main_canvas, text="Reset to Defaults",command= self.set_values,font=customFont_small)
-                self.default_button.place(x=250,y=550)
-                self.save_button = Button(self.main_canvas, text="Save Changes",command= self.save_values,font=customFont_small)
-                self.save_button.place(x=400,y=550)
-                self.home_button = Button(self.main_canvas, text="Back to Home Screen",command= root.destroy,font=customFont_small)
-                self.home_button.place(x=600,y=550)                
+                self.class_name_button = Button(self.main_canvas, text="Change Class Name ",command= self.change_names,font=self.customFont_small)
+                self.class_name_button.place(x=250,y=550)                                 
+                self.default_button = Button(self.main_canvas, text="Reset to Defaults",command= self.set_values,font=self.customFont_small)
+                self.default_button.place(x=400,y=550)
+                self.save_button = Button(self.main_canvas, text="Save Changes",command= self.save_values,font=self.customFont_small)
+                self.save_button.place(x=530,y=550)
+                self.home_button = Button(self.main_canvas, text="Back to Home Screen",command= root.destroy,font=self.customFont_small)
+                self.home_button.place(x=640,y=550)                
                 
                 #Creting the text
-                self.main_canvas.create_text(150,150, text = "Enter the time, name and URL of each class. Then click 'Save Changes'. ",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,200, text = "Class 1",anchor=NW,font=customFont)  
-                self.main_canvas.create_text(250,250, text = "Class 2",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,300, text = "Class 3",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,350, text = "Class 4",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,400, text = "Class 5",anchor=NW,font=customFont)
-                self.main_canvas.create_text(250,450, text = "Class 6",anchor=NW,font=customFont)
+                self.main_canvas.create_text(150,150, text = "Enter the time, name and URL of each class. Then click 'Save Changes'. ",anchor=NW,font=self.customFont)
+                self.main_canvas.create_text(250,200, text = "Class 1",anchor=NW,font=self.customFont)  
+                self.main_canvas.create_text(250,250, text = "Class 2",anchor=NW,font=self.customFont)
+                self.main_canvas.create_text(250,300, text = "Class 3",anchor=NW,font=self.customFont)
+                self.main_canvas.create_text(250,350, text = "Class 4",anchor=NW,font=self.customFont)
+                self.main_canvas.create_text(250,400, text = "Class 5",anchor=NW,font=self.customFont)
+                self.main_canvas.create_text(250,450, text = "Class 6",anchor=NW,font=self.customFont)
                 
                 #Initializing spinners
                 
@@ -205,11 +206,37 @@ class Days_UI:
                 self.entry5 = Entry(self.main_canvas,width = 30)
                 self.entry5.place(x=400,y=400)
                 self.entry6 = Entry(self.main_canvas,width = 30)                
-                self.entry6.place(x=400,y=450)
+                self.entry6.place(x=400,y=450)                 
                 self.set_values()
                 
-                                
+                               
         
+        def change_names(self):
+                
+                self.entry7 = Entry(self.main_canvas,width = 12)
+                self.entry7.place(x=250,y=200)
+                self.entry8 = Entry(self.main_canvas,width = 12)
+                self.entry8.place(x=250,y=250)
+                self.entry9 = Entry(self.main_canvas,width = 12)
+                self.entry9.place(x=250,y=300)
+                self.entry10 = Entry(self.main_canvas,width = 12)                
+                self.entry10.place(x=250,y=350)
+                self.entry11 = Entry(self.main_canvas,width = 12)
+                self.entry11.place(x=250,y=400)
+                self.entry12 = Entry(self.main_canvas,width = 12)                
+                self.entry12.place(x=250,y=450)  
+                
+                self.class_name_button = Button(self.main_canvas, text="Save Name Changes",command= self.save_names,font=self.customFont_small)
+                self.class_name_button.place(x=250,y=550) 
+      
+        def save_names(self):
+                self.entry7.destroy()
+                self.entry8.destroy()
+                self.entry9.destroy()
+                self.entry10.destroy()
+                self.entry11.destroy()
+                self.entry12.destroy()
+                self.class_name_button.destroy()
                 
         #writes the values of all text fields and spinners to a file
         def save_values(self):
