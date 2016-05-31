@@ -20,6 +20,7 @@ import time
 import datetime
 import sys
 import subprocess
+import re
 
 def centre_screen(root):
         # get screen width and height
@@ -210,8 +211,7 @@ class Days_UI:
                 
                                
         
-        def change_names(self):
-                
+        def change_names(self):                
                 self.entry7 = Entry(self.main_canvas,width = 12)
                 self.entry7.place(x=250,y=200)
                 self.entry8 = Entry(self.main_canvas,width = 12)
@@ -232,19 +232,19 @@ class Days_UI:
         def save_values(self):
                 self.get_spinner()
                 self.get_text()
-                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6], [self.name1, self.name2,self.name3,self.name4,self.name5,self.name6]]              
+                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6]]              
               
-                f = open(self.name + ".txt", "w")
+                f = open(str(self.name + ".txt"), "w")
                 for row in li:
                         for item in row:
                                 f.write(str(item) + "|") # is str(item) necessary?
                         f.write("\n")
                 f.close()
                      
-                self.in_textbox5 = li[0][4]
-                self.in_textbox6 = li[0][5]
-                self.in_spin5 = li[1][4]
-                self.in_spin6 = li[1][5]
+                #self.in_textbox5 = li[0][4]
+                #self.in_textbox6 = li[0][5]
+                #self.in_spin5 = li[1][4]
+                #self.in_spin6 = li[1][5]
                 
         def save_names(self):
                 self.get_names()
@@ -286,7 +286,7 @@ class Days_UI:
                         
         def set_values(self):
                 #Reading the values from the text file
-                f = open(self.name + ".txt", "r")
+                f = open(str(self.name + ".txt"), "r")
                 li = []
                 for line in f:
                         li.append(line.strip("\n").split("|"))
@@ -310,12 +310,12 @@ class Days_UI:
                 self.in_spin5 = li[1][4]
                 self.in_spin6 = li[1][5]
                 
-                self.name1 = li[2][0]
-                self.name2 = li[2][1]
-                self.name3 = li[2][2]
-                self.name4 = li[2][3]   
-                self.name5 = li[2][4]
-                self.name6 = li[2][5]                
+                #self.name1 = li[2][0]
+                #self.name2 = li[2][1]
+                #self.name3 = li[2][2]
+                #self.name4 = li[2][3]   
+                #self.name5 = li[2][4]
+                #self.name6 = li[2][5]                
                                 
                 #Fills the appropriate values to the text boxes and spinners
                 self.spinner1.delete(0,"end")
@@ -342,12 +342,38 @@ class Days_UI:
                 self.spinner6.insert(0,self.in_spin6)
                 self.entry6.delete(0,END)
                 self.entry6.insert(0,self.in_textbox6)
-                
-        def pending_class():
-                return class_url
-                
-        def pending_time():
-                return class_time
+                self.entry6.delete(0,END)
+                self.entry6.insert(0,self.in_textbox6)  
+        
+# takes a day object and returns the url of the class that needs to be launched next
+def pending_class(x):
+        li = [[],[]]
+        t = time_to_int(current_time())
+        # check for attributes, add them to a list
+        # if there is a url attribute, add the corresponding time attribute
+        if hasattr(in_textbox1, x):
+                li[0].append(time_convert(x.in_spin1))
+                li[1].append(x.in_textbox1)
+        if hasattr(in_textbox2, x):
+                li[0].append(time_convert(x.in_spin2))
+                li[1].append(x.in_textbox2)                
+        if hasattr(in_textbox3, x):
+                li[0].append(time_convert(x.in_spin3))
+                li[1].append(x.in_textbox3)                
+        if hasattr(in_textbox4, x):
+                li[0].append(time_convert(x.in_spin4))
+                li[1].append(x.in_textbox4)                
+        if hasattr(in_textbox5, x):
+                li[0].append(time_convert(x.in_spin5))
+                li[1].append(x.in_textbox5)                
+        if hasattr(in_textbox6, x):
+                li[0].append(time_convert(x.in_spin6))
+                li[1].append(x.in_textbox6)      
+        return class_url
+
+# takes a day object and returns the time of the class that needs to be launched next                                
+def pending_time():
+        return class_time
 
 # returns the current time in 24 hr format
 def current_time():
@@ -357,7 +383,7 @@ def current_time():
 
 # converts time from 12 hr format to 24 hr format
 def time_convert(x):
-        time = "0:00" # default value to prevent crashing
+        time = "0:00" # default value
         if "AM" in x:
                 time = x.strip(" AM") + ":00"
         if "PM" in x:
@@ -367,7 +393,17 @@ def time_convert(x):
                         return "0:00"
         return time
 
+# converts time from 24 hr format to an int representing minutes past midnight
+def time_to_int(x):
+        time = 0 # default value
+        if re.match("^[0-9]{1,2}:[0-9]{2}$", x):
+                if len(x) < 5:
+                        x = "0" + x
+                time = (int(x[0:2]) * 60) + int(x[3:5])                 
+        return time 
+
 root_main = Tk()
+
 
 s = Start_UI(root_main)
 #m.get_spinner() commented this out for now because it breaks read_values()
