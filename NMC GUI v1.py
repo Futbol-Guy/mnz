@@ -55,7 +55,13 @@ class Start_UI:
                         label_thursday.config(image= pic)
                                 
                 def friday_L(event, pic):
-                        label_friday.config(image= pic)                
+                        label_friday.config(image= pic)
+                
+                def btuesday_L(event,pic):
+                        label_btues.config(image=pic)
+                
+                def bthursday_L(event,pic):
+                        label_bthur.config(image=pic)
                 
                 def lift_monday(event):
                         image= PhotoImage(file="Images\Mon Art.gif")
@@ -82,20 +88,31 @@ class Start_UI:
                         main = Toplevel(root_main)
                         f = Days_UI(main, image,"Friday")
                         
+                def test_function(event):
+                        print "This is where the running loop will go"
+                        
                 root.title("Never Miss A Class")
                         
                 #Getting the default pictures
-                nl_mon_pic = PhotoImage(file="Images\MS_NL_Mon.gif")
-                nl_tues_pic = PhotoImage(file="Images\MS_NL_Tues.gif")
-                nl_wed_pic = PhotoImage(file="Images\MS_NL_Wed.gif")
-                nl_thurs_pic = PhotoImage(file="Images\MS_NL_Thurs.gif")
-                nl_fri_pic = PhotoImage(file="Images\MS_NL_Fri.gif")
+                nl_mon_pic = PhotoImage(file="Images\Layer 5.gif")
+                nl_tues_pic = PhotoImage(file="Images\Layer 4.gif")
+                nl_wed_pic = PhotoImage(file="Images\Layer 3.gif")
+                nl_thurs_pic = PhotoImage(file="Images\Layer 2.gif")
+                nl_fri_pic = PhotoImage(file="Images\Layer 1.gif")
+                nl_bmon_pic = PhotoImage(file="Images\Layer 10.gif")
+                nl_btues_pic = PhotoImage(file="Images\Layer 9.gif")
+                nl_bwed_pic = PhotoImage(file="Images\Layer 8.gif")
+                nl_bthurs_pic = PhotoImage(file="Images\Layer 7.gif")
+                nl_bfri_pic = PhotoImage(file="Images\Layer 6.gif") 
                 #Lightning Pics
-                l_mon_pic = PhotoImage(file="Images\MS_L_Mon.gif")    
-                l_tues_pic = PhotoImage(file="Images\MS_L_Tues.gif")
-                l_wed_pic = PhotoImage(file="Images\MS_L_Wed.gif")
-                l_thurs_pic = PhotoImage(file="Images\MS_L_Thurs.gif")
-                l_fri_pic = PhotoImage(file="Images\MS_L_Fri.gif")
+                l_mon_pic = PhotoImage(file="Images\L_M.gif")    
+                l_tues_pic = PhotoImage(file="Images\L_T.gif")
+                l_wed_pic = PhotoImage(file="Images\L_W.gif")
+                l_thurs_pic = PhotoImage(file="Images\L_Th.gif")
+                l_fri_pic = PhotoImage(file="Images\L_F.gif")
+                l_btues_pic = PhotoImage(file="Images\L_BT.gif")    
+                l_bthurs_pic = PhotoImage(file="Images\L_BTh.gif")
+                    
                 
                 #creating a label for each image        
                 label_monday = Label(root, image= nl_mon_pic, borderwidth = 0, highlightthickness= 0)
@@ -104,6 +121,10 @@ class Start_UI:
                 label_monday.bind("<Enter>", lambda event: monday_L(event, l_mon_pic))
                 label_monday.bind("<Leave>", lambda event: monday_L(event, nl_mon_pic))
                 label_monday.bind("<Button-1>", lift_monday)
+                
+                label_bmon = Label(root, image = nl_bmon_pic, borderwidth = 0, highlightthickness= 0)
+                label_bmon.image = nl_bmon_pic
+                label_bmon.grid(row=1,column=0)                
                 #schedule.every().monday.at("11:16").do(webbrowser.open("www.virtuallearning.ca"))
                         
                 label_tuesday = Label(root, image= nl_tues_pic, borderwidth = 0, highlightthickness= 0)
@@ -111,24 +132,52 @@ class Start_UI:
                 label_tuesday.bind("<Enter>", lambda event: tuesday_L(event, l_tues_pic))
                 label_tuesday.bind("<Leave>", lambda event: tuesday_L(event, nl_tues_pic))
                 label_tuesday.bind("<Button-1>", lift_tuesday)
+                
+                label_btues = Label(root, image= nl_btues_pic, borderwidth = 0, highlightthickness= 0)
+                label_btues.grid(row=1, column= 1)
+                label_btues.bind("<Enter>", lambda event: btuesday_L(event, l_btues_pic))
+                label_btues.bind("<Leave>", lambda event: btuesday_L(event, nl_btues_pic))
+                label_btues.bind("<Button-1>", test_function)
+                #
+                #                                    ^^^^
+                #Najib, this is where you put your running loop
+                #
+                #
                         
                 label_wednesday = Label(root, image= nl_wed_pic, borderwidth = 0, highlightthickness= 0)
                 label_wednesday.grid(row=0, column= 2)
                 label_wednesday.bind("<Enter>", lambda event: wednesday_L(event, l_wed_pic))
                 label_wednesday.bind("<Leave>", lambda event: wednesday_L(event, nl_wed_pic))
                 label_wednesday.bind("<Button-1>", lift_wednesday)
+                
+                label_bwed = Label(root, image = nl_bwed_pic, borderwidth = 0, highlightthickness= 0)
+                label_bwed.image = nl_bwed_pic
+                label_bwed.grid(row=1,column=2)                
                         
                 label_thursday = Label(root, image= nl_thurs_pic, borderwidth = 0, highlightthickness= 0)
                 label_thursday.grid(row=0, column= 3)
                 label_thursday.bind("<Enter>", lambda event: thursday_L(event, l_thurs_pic))
                 label_thursday.bind("<Leave>", lambda event: thursday_L(event, nl_thurs_pic))
                 label_thursday.bind("<Button-1>", lift_thursday)
+                
+                label_bthur = Label(root, image= nl_bthurs_pic, borderwidth = 0, highlightthickness= 0)
+                label_bthur.grid(row=1, column= 3)
+                label_bthur.bind("<Enter>", lambda event: bthursday_L(event, l_bthurs_pic))
+                label_bthur.bind("<Leave>", lambda event: bthursday_L(event, nl_bthurs_pic))
+                label_bthur.bind("<Button-1>", '''HELP WINDOW''')                
                         
                 label_friday = Label(root, image= nl_fri_pic, borderwidth = 0, highlightthickness= 0)
                 label_friday.grid(row=0, column= 4)
                 label_friday.bind("<Enter>", lambda event: friday_L(event, l_fri_pic))
                 label_friday.bind("<Leave>", lambda event: friday_L(event, nl_fri_pic))
                 label_friday.bind("<Button-1>", lift_friday)
+                
+                label_bfri = Label(root, image = nl_bfri_pic, borderwidth = 0, highlightthickness= 0)
+                label_bfri.image = nl_bfri_pic
+                label_bfri.grid(row=1,column=4)                
+                
+                
+                
                 
                 
 
