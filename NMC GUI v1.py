@@ -208,7 +208,7 @@ class Days_UI:
                 self.main_canvas.image=bg_image              
                      
                         
-                time_tuple = ("1 AM","2 AM","3 AM","4 AM","5 AM","6 AM","7 AM","9 AM","10 AM","11 AM","12 AM","1 PM","2 PM","3 PM","4 PM","5 PM","6 PM","7 PM","9 PM","10 PM","11 PM","12 PM")
+                time_tuple = ("6:00 AM","6:15 AM","6:30 AM","6:45 AM","7:00 AM","7:15 AM","7:30 AM","7:45 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM","9:15 AM","9:30 AM","9:40 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 AM","12:15 AM","12:30 AM","12:45 AM","1:00 PM","1:15 PM","1:30 PM","1:45 PM","2:00 PM","2:15 PM","2:30 PM","2:45 PM","3:00 PM","3:15 PM","3:30 PM","3:45 PM","4:00 PM","4:15 PM","4:30 PM","4:45 PM","5:00 PM","5:15 PM","5:30 PM","5:45 PM","6:00 PM","6:15 PM","6:30 PM","6:45 PM","7:00 PM","7:15 PM","7:30 PM","7:45 PM","8:00 PM","8:15 PM","8:30 PM","8:45 PM","9:00 PM")
                 
                 #Placing the buttons.
                 self.class_name_button = Button(self.main_canvas, text="Change Class Name ",command= self.change_names,font=self.customFont_small)
@@ -220,14 +220,6 @@ class Days_UI:
                 self.home_button = Button(self.main_canvas, text="Back to Home Screen",command= root.destroy,font=self.customFont_small)
                 self.home_button.place(x=640,y=550)                
                 
-                #Creting the text
-                self.main_canvas.create_text(150,150, text = "Enter the time, name and URL of each class. Then click 'Save Changes'. ",anchor=NW,font=self.customFont)
-                self.main_canvas.create_text(250,200, text = "Class 1",anchor=NW,font=self.customFont)  
-                self.main_canvas.create_text(250,250, text = "Class 2",anchor=NW,font=self.customFont)
-                self.main_canvas.create_text(250,300, text = "Class 3",anchor=NW,font=self.customFont)
-                self.main_canvas.create_text(250,350, text = "Class 4",anchor=NW,font=self.customFont)
-                self.main_canvas.create_text(250,400, text = "Class 5",anchor=NW,font=self.customFont)
-                self.main_canvas.create_text(250,450, text = "Class 6",anchor=NW,font=self.customFont)
                 
                 #Initializing spinners
                 
@@ -256,8 +248,40 @@ class Days_UI:
                 self.entry5 = Entry(self.main_canvas,width = 30)
                 self.entry5.place(x=400,y=400)
                 self.entry6 = Entry(self.main_canvas,width = 30)                
-                self.entry6.place(x=400,y=450)                 
+                self.entry6.place(x=400,y=450)   
                 
+                self.set_values()
+                
+                #Creting the text
+                self.main_canvas.create_text(150,150, text = "Enter the time, name and URL of each class. Then click 'Save Changes'. ",anchor=NW,font=self.customFont)
+                self.display_names()
+                 
+                                               
+        def display_names(self):
+                if self.name_list[0] != "":
+                        self.p_name1 = self.main_canvas.create_text(250,200, text = self.name_list[0],anchor=NW,font=self.customFont) 
+                else:
+                        self.p_name1 = self.main_canvas.create_text(250,200, text = "Class 1",anchor=NW,font=self.customFont) 
+                if self.name_list[1] != "":
+                        self.p_name2 = self.main_canvas.create_text(250,250, text = self.name_list[1],anchor=NW,font=self.customFont)
+                else:
+                        self.p_name2 = self.main_canvas.create_text(250,250, text = "Class 2",anchor=NW,font=self.customFont)
+                if self.name_list[2] != "":
+                        self.p_name3 = self.main_canvas.create_text(250,300, text = self.name_list[2],anchor=NW,font=self.customFont) 
+                else:
+                        self.p_name3 = self.main_canvas.create_text(250,300, text = "Class 3",anchor=NW,font=self.customFont) 
+                if self.name_list[3] != "":
+                        self.p_name4 = self.main_canvas.create_text(250,350, text = self.name_list[3],anchor=NW,font=self.customFont)
+                else:
+                        self.p_name4 = self.main_canvas.create_text(250,350, text = "Class 4",anchor=NW,font=self.customFont)
+                if self.name_list[4] != "":
+                        self.p_name5 = self.main_canvas.create_text(250,400, text = self.name_list[4],anchor=NW,font=self.customFont) 
+                else:
+                        self.p_name5 = self.main_canvas.create_text(250,400, text = "Class 5",anchor=NW,font=self.customFont) 
+                if self.name_list[5] != "":
+                        self.p_name6 = self.main_canvas.create_text(250,450, text = self.name_list[5],anchor=NW,font=self.customFont)
+                else:
+                        self.p_name6 = self.main_canvas.create_text(250,450, text = "Class 6",anchor=NW,font=self.customFont)                
                                
         
         def change_names(self):                
@@ -281,7 +305,7 @@ class Days_UI:
         def save_values(self):
                 self.get_spinner()
                 self.get_text()
-                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6]]              
+                li = [[self.in_textbox1, self.in_textbox2, self.in_textbox3, self.in_textbox4, self.in_textbox5, self.in_textbox6], [self.in_spin1, self.in_spin2, self.in_spin3, self.in_spin4, self.in_spin5, self.in_spin6],[self.name_list[0],self.name_list[1],self.name_list[2],self.name_list[3],self.name_list[4],self.name_list[5]]]              
               
                 f = open(str(self.name + ".txt"), "w")
                 for row in li:
@@ -305,8 +329,16 @@ class Days_UI:
                 self.entry10.destroy()
                 self.entry11.destroy()
                 self.entry12.destroy()
-                self.class_name_button.destroy()        
-        
+                self.class_name_button.destroy()
+                
+                self.main_canvas.delete(self.p_name1)
+                self.main_canvas.delete(self.p_name2)
+                self.main_canvas.delete(self.p_name3)
+                self.main_canvas.delete(self.p_name4)
+                self.main_canvas.delete(self.p_name5)
+                self.main_canvas.delete(self.p_name6) 
+                self.display_names()
+                
         #getting the spinner values
         def get_spinner(self):
                 self.in_spin1 = self.spinner1.get()
@@ -332,6 +364,18 @@ class Days_UI:
                 self.name4 = self.entry10.get()
                 self.name5 = self.entry11.get()
                 self.name6 = self.entry12.get()
+                if self.name1 != "":
+                        self.name_list[0] = self.name1
+                if self.name2 != "":
+                        self.name_list[1] = self.name2
+                if self.name3 != "":
+                        self.name_list[2] = self.name3
+                if self.name4 != "":
+                        self.name_list[3] = self.name4
+                if self.name5 != "":
+                        self.name_list[4] = self.name5
+                if self.name6 != "":
+                        self.name_list[5] = self.name6               
                         
         def set_values(self):
                 #Reading the values from the text file
@@ -359,13 +403,21 @@ class Days_UI:
                 self.in_spin5 = li[1][4]
                 self.in_spin6 = li[1][5]
                 
-                #self.name1 = li[2][0]
-                #self.name2 = li[2][1]
-                #self.name3 = li[2][2]
-                #self.name4 = li[2][3]   
-                #self.name5 = li[2][4]
-                #self.name6 = li[2][5]                
-                                
+                self.name1 = li[2][0]
+                self.name2 = li[2][1]
+                self.name3 = li[2][2]
+                self.name4 = li[2][3]   
+                self.name5 = li[2][4]
+                self.name6 = li[2][5]
+                
+                self.name_list = []
+                self.name_list.append(self.name1)
+                self.name_list.append(self.name2)
+                self.name_list.append(self.name3)
+                self.name_list.append(self.name4)
+                self.name_list.append(self.name5)
+                self.name_list.append(self.name6)
+                
                 #Fills the appropriate values to the text boxes and spinners
                 self.spinner1.delete(0,"end")
                 self.spinner1.insert(0,self.in_spin1)
@@ -392,7 +444,9 @@ class Days_UI:
                 self.entry6.delete(0,END)
                 self.entry6.insert(0,self.in_textbox6)
                 self.entry6.delete(0,END)
-                self.entry6.insert(0,self.in_textbox6)  
+                self.entry6.insert(0,self.in_textbox6) 
+                
+                
         
 # takes a day object and returns the url of the class that needs to be launched next
 def pending_class(x):
@@ -434,9 +488,9 @@ def current_time():
 def time_convert(x):
         time = "0:00" # default value
         if "AM" in x:
-                time = x.strip(" AM") + ":00"
+                time = x.strip(" AM")
         if "PM" in x:
-                time = str(int(x.strip(" PM")) + 12) + ":00"
+                time = str(int(x.strip(" PM")) + 12)
                 #if the time is midnight, then return 0:00 instead of 24:00
                 if time == "24:00":
                         return "0:00"
