@@ -21,6 +21,7 @@ import datetime
 import sys
 import subprocess
 import re
+import tkMessageBox
 
 def centre_screen(root):
         # get screen width and height
@@ -33,10 +34,60 @@ def centre_screen(root):
         
         root.geometry('%dx%d+%d+%d' % (1000, 700, x, y))        
 
+class Help_UI:
+        def __init__(self,root,bg_image):
+                #setting a font
+                self.customFont_small = tkFont.Font(family="Minecraft", size=10) 
+                
+                root.title("Never Miss A Class")
+                root.maxsize(width=1000,height=700)
+                root.minsize(width=1000,height=700)                
+                centre_screen(root)
+                
+                help_1 = PhotoImage(file="Images\Help 1.gif")
+                help_2 = PhotoImage(file="Images\Help 2.gif")
+                help_3 = PhotoImage(file="Images\Help 3.gif")
+                help_4 = PhotoImage(file="Images\Help 4.gif")                
+                
+                self.main_canvas = Canvas(root,width=1000,height=700, highlightthickness=0)
+                self.main_canvas.grid(row=0, column=0)
+                                
+                self.main_canvas.create_image(0,0,anchor=NW, image=bg_image)
+                self.main_canvas.image=bg_image  
+                
+                self.main_canvas.create_text(20,90, text = "Welcome to Never Miss a Class! To get started, click what day you have",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(270,110, text = " a class on.",anchor=NW,font=self.customFont_small) 
+                self.main_canvas.create_text(20,450, text = "Next, select the time your class starts. This program will launch the class ",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(20,470, text = "Five minutes before the time that you select.",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(20,470, text = "Next, get the class URL. ",anchor=NW,font=self.customFont_small)
+                
+                
+                self.h1_canvas = Canvas(self.main_canvas,width=250,height=336, highlightthickness=0)
+                self.h1_canvas.place(x=20,y=110)
+                self.h1_canvas.create_image(0,0,image=help_1,anchor=NW)
+                self.h1_canvas.image = help_1
+                self.h2_canvas = Canvas(self.main_canvas,width=478,height=160, highlightthickness=0)
+                self.h2_canvas.place(x=20,y=490)
+                self.h2_canvas.create_image(0,0,image=help_2,anchor=NW)
+                self.h2_canvas.image = help_2
+                self.h3_canvas = Canvas(self.main_canvas,width=250,height=153, highlightthickness=0)
+                self.h3_canvas.place(x=520,y=110)
+                self.h3_canvas.create_image(0,0,image=help_3,anchor=NW)
+                self.h3_canvas.image = help_3
+                self.h4_canvas = Canvas(self.main_canvas,width=350,height=174, highlightthickness=0)
+                self.h4_canvas.place(x=520,y=400)
+                self.h4_canvas.create_image(0,0,image=help_4,anchor=NW)
+                self.h4_canvas.image = help_4                
+                
+                self.main_B = Button(self.main_canvas, text = "Back to Home Screen",command= root.destroy,font=self.customFont_small)
+                self.main_B.place(x=20,y=660)
+                
+
 class Start_UI:
                                 
                 
         def __init__(self, root):
+                root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)
                 centre_screen(root)
@@ -87,11 +138,15 @@ class Start_UI:
                         image= PhotoImage(file="Images\Fri Art.gif")
                         main = Toplevel(root_main)
                         f = Days_UI(main, image,"Friday")
+                
+                def lift_help(event):
+                        image= PhotoImage(file="Images\Help Art.gif")
+                        main = Toplevel(root_main)
+                        help = Help_UI(main,image)
                         
                 def test_function(event):
-                        print "This is where the running loop will go"
+                        tkMessageBox.showinfo("Never Miss Class", "Changes have been saved. The program is now running in the background.")
                         
-                root.title("Never Miss A Class")
                         
                 #Getting the default pictures
                 nl_mon_pic = PhotoImage(file="Images\Layer 5.gif")
@@ -164,7 +219,7 @@ class Start_UI:
                 label_bthur.grid(row=1, column= 3)
                 label_bthur.bind("<Enter>", lambda event: bthursday_L(event, l_bthurs_pic))
                 label_bthur.bind("<Leave>", lambda event: bthursday_L(event, nl_bthurs_pic))
-                label_bthur.bind("<Button-1>", '''HELP WINDOW''')                
+                label_bthur.bind("<Button-1>", lift_help)                
                         
                 label_friday = Label(root, image= nl_fri_pic, borderwidth = 0, highlightthickness= 0)
                 label_friday.grid(row=0, column= 4)
@@ -223,18 +278,18 @@ class Days_UI:
                 
                 #Initializing spinners
                 
-                self.spinner1 = Spinbox(self.main_canvas, values=time_tuple ,width=5)
-                self.spinner1.place(x=350,y=200)                  
-                self.spinner2 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner2.place(x=350,y=250) 
-                self.spinner3 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner3.place(x=350,y=300)   
-                self.spinner4 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner4.place(x=350,y=350) 
-                self.spinner5 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner5.place(x=350,y=400)   
-                self.spinner6 = Spinbox(self.main_canvas, values=time_tuple,width=5)
-                self.spinner6.place(x=350,y=450)                 
+                self.spinner1 = Spinbox(self.main_canvas, values=time_tuple ,width=7)
+                self.spinner1.place(x=340,y=200)                  
+                self.spinner2 = Spinbox(self.main_canvas, values=time_tuple,width=7)
+                self.spinner2.place(x=340,y=250) 
+                self.spinner3 = Spinbox(self.main_canvas, values=time_tuple,width=7)
+                self.spinner3.place(x=340,y=300)   
+                self.spinner4 = Spinbox(self.main_canvas, values=time_tuple,width=7)
+                self.spinner4.place(x=340,y=350) 
+                self.spinner5 = Spinbox(self.main_canvas, values=time_tuple,width=7)
+                self.spinner5.place(x=340,y=400)   
+                self.spinner6 = Spinbox(self.main_canvas, values=time_tuple,width=7)
+                self.spinner6.place(x=340,y=450)                 
                 
                 #Initializing text boxes
                 self.entry1 = Entry(self.main_canvas,width = 30)
