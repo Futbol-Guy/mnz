@@ -32,13 +32,63 @@ def centre_screen(root):
         x = (ws/2) - (500)
         y = (hs/2) - (350)
         
-        root.geometry('%dx%d+%d+%d' % (1000, 700, x, y))        
-
-class Help_UI:
+        root.geometry('%dx%d+%d+%d' % (1000, 700, x, y))  
+        
+        
+class Help_two_UI:
         def __init__(self,root,bg_image):
-                #setting a font
-                self.customFont_small = tkFont.Font(family="Minecraft", size=10) 
                 
+                def onObjectClick(event):
+                        webbrowser.open_new(r"http://www.youtube.com") 
+                        
+                def lift_last():
+                        root.destroy()
+                        main = Toplevel(root_main)
+                        Help_one_UI(main,bg_image)                        
+                #setting a font
+                self.customFont_small = tkFont.Font(family="Minecraft", size=10)
+                 
+                root.title("Never Miss A Class")
+                root.maxsize(width=1000,height=700)
+                root.minsize(width=1000,height=700)                
+                centre_screen(root)
+                self.main_canvas = Canvas(root,width=1000,height=700, highlightthickness=0)
+                self.main_canvas.grid(row=0, column=0)
+                                
+                self.main_canvas.create_image(0,0,anchor=NW, image=bg_image)
+                self.main_canvas.image=bg_image 
+                
+                help_1 = PhotoImage(file="Images\Help 7.gif")
+                
+                self.main_canvas.create_text(20,90, text = "Finally, save your changes by clicking the button.",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(20,110, text = "If you would like to lauch the Connect window instead of the class in a new tab (eg. when the class is launched in firefox), launch the class in firefox and copy ",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(20,130, text = "the link found in the pop up window (not in the actual connect room).",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(430,150, text = "For more information and help, watch the tutorial video supplied         and read the readMe",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(430,170, text = "file located in where this program is installed.",anchor=NW,font=self.customFont_small)               
+                
+                self.obj1Id = self.main_canvas.create_text(827,150,activefill="#33adff",text='here', fill="#0099ff",tags='obj1Tag',anchor=NW,font=self.customFont_small)
+                self.main_canvas.tag_bind(self.obj1Id, '<ButtonPress-1>', onObjectClick) 
+                
+                self.main_B = Button(self.main_canvas, text = "Previous Page",command= lift_last,font=self.customFont_small)
+                self.main_B.place(x=20,y=660)
+                self.next_B = Button(self.main_canvas, text = "Back to Home Page",command= root.destroy,font=self.customFont_small)
+                self.next_B.place(x=840,y=660)  
+                
+                self.h1_canvas = Canvas(self.main_canvas,width=400,height=246, highlightthickness=0)
+                self.h1_canvas.place(x=20,y=150)
+                self.h1_canvas.create_image(0,0,image=help_1,anchor=NW)
+                self.h1_canvas.image = help_1                
+                                
+
+class Help_one_UI:
+        def __init__(self,root,bg_image):
+                def lift_next():
+                        root.destroy()
+                        main = Toplevel(root_main)
+                        Help_two_UI(main,bg_image)                  
+                #setting a font
+                self.customFont_small = tkFont.Font(family="Minecraft", size=10)
+                 
                 root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)                
@@ -47,7 +97,8 @@ class Help_UI:
                 help_1 = PhotoImage(file="Images\Help 1.gif")
                 help_2 = PhotoImage(file="Images\Help 2.gif")
                 help_3 = PhotoImage(file="Images\Help 3.gif")
-                help_4 = PhotoImage(file="Images\Help 4.gif")                
+                help_4 = PhotoImage(file="Images\Help 4.gif")   
+                help_5 = PhotoImage(file="Images\Help 5.gif") 
                 
                 self.main_canvas = Canvas(root,width=1000,height=700, highlightthickness=0)
                 self.main_canvas.grid(row=0, column=0)
@@ -59,7 +110,8 @@ class Help_UI:
                 self.main_canvas.create_text(270,110, text = " a class on.",anchor=NW,font=self.customFont_small) 
                 self.main_canvas.create_text(20,450, text = "Next, select the time your class starts. This program will launch the class ",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(20,470, text = "Five minutes before the time that you select.",anchor=NW,font=self.customFont_small)
-                self.main_canvas.create_text(20,470, text = "Next, get the class URL. ",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(780,90, text = "Next, get the class URL. ",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(520,260, text = "Copy the link pictured below and paste it into the appropriate text box. ",anchor=NW,font=self.customFont_small)
                 
                 
                 self.h1_canvas = Canvas(self.main_canvas,width=250,height=336, highlightthickness=0)
@@ -71,16 +123,23 @@ class Help_UI:
                 self.h2_canvas.create_image(0,0,image=help_2,anchor=NW)
                 self.h2_canvas.image = help_2
                 self.h3_canvas = Canvas(self.main_canvas,width=250,height=153, highlightthickness=0)
-                self.h3_canvas.place(x=520,y=110)
+                self.h3_canvas.place(x=520,y=90)
                 self.h3_canvas.create_image(0,0,image=help_3,anchor=NW)
                 self.h3_canvas.image = help_3
                 self.h4_canvas = Canvas(self.main_canvas,width=350,height=174, highlightthickness=0)
-                self.h4_canvas.place(x=520,y=400)
+                self.h4_canvas.place(x=620,y=280)
                 self.h4_canvas.create_image(0,0,image=help_4,anchor=NW)
-                self.h4_canvas.image = help_4                
+                self.h4_canvas.image = help_4
+                self.h5_canvas = Canvas(self.main_canvas,width=408,height=157, highlightthickness=0)
+                self.h5_canvas.place(x=520,y=490)
+                self.h5_canvas.create_image(0,0,image=help_5,anchor=NW)
+                self.h5_canvas.image = help_5                
                 
                 self.main_B = Button(self.main_canvas, text = "Back to Home Screen",command= root.destroy,font=self.customFont_small)
                 self.main_B.place(x=20,y=660)
+                self.next_B = Button(self.main_canvas, text = "Next Page",command= lift_next,font=self.customFont_small)
+                self.next_B.place(x=900,y=660)                                                                
+                      
                 
 
 class Start_UI:
@@ -142,7 +201,7 @@ class Start_UI:
                 def lift_help(event):
                         image= PhotoImage(file="Images\Help Art.gif")
                         main = Toplevel(root_main)
-                        help = Help_UI(main,image)
+                        help = Help_one_UI(main,image)
                         
                 def test_function(event):
                         tkMessageBox.showinfo("Never Miss Class", "Changes have been saved. The program is now running in the background.")
