@@ -205,9 +205,23 @@ class Start_UI:
                         
                 def test_function(event):
                         tkMessageBox.showinfo("Never Miss Class", "Changes have been saved. The program is now running in the background.")
-                                                
+                        weekdays = {0:"Monday",1:"Tuesday",2:"Wednesday",3:"Thursday",4:"Friday"}
+                        today = datetime.datetime.now().weekday()
 
+                        f = open(weekdays[today]+".txt", "r")
+                        classes = []
+                        for line in f:
+                                classes.append(line.strip("\n").split("|"))
+                        f.close()
                         
+                        for i in range(len(classes[0])):
+                                # add every class entered for the current day to the job queue
+                                # along with its scheduled time in 24 hr format
+                                if classes[0][i] != "":
+                                        class_url = classes[0][i]
+                                        class_time = time_convert(classes[1][i])
+                                        schedule.every().day.at(time_convert(classes[1][i])).do(webbrowser.open, classes[0][i])                                                
+     
                 #Getting the default pictures
                 nl_mon_pic = PhotoImage(file="Images\Layer 5.gif")
                 nl_tues_pic = PhotoImage(file="Images\Layer 4.gif")
