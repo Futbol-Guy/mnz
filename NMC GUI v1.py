@@ -205,7 +205,8 @@ class Start_UI:
                         
                 def test_function(event):
                         tkMessageBox.showinfo("Never Miss Class", "Changes have been saved. The program is now running in the background.")
-                        
+                                                
+
                         
                 #Getting the default pictures
                 nl_mon_pic = PhotoImage(file="Images\Layer 5.gif")
@@ -604,10 +605,15 @@ def time_convert(x):
         if "AM" in x:
                 time = x.strip(" AM")
         if "PM" in x:
-                time = str(int(x.strip(" PM")) + 12)
-                #if the time is midnight, then return 0:00 instead of 24:00
-                if time == "24:00":
-                        return "0:00"
+                # split the time in half by the colon, ex. 9:30 becomes 9 and 30
+                split_time = x.strip(" PM").split(":")
+                # add 12 to the hours portion
+                hours = str(int(split_time[0]) + 12)
+                #use 0 to represent midnight (12:00 PM) instead of 24
+                if hours == "24":
+                        hours = "0"
+                # put the string back together again
+                time = hours + ":" + split_time[1]
         return time
 
 # converts time from 24 hr format to an int representing minutes past midnight
