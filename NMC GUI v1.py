@@ -22,6 +22,7 @@ import sys
 import subprocess
 import re
 import tkMessageBox
+import thread
 
 def centre_screen(root):
         # get screen width and height
@@ -204,7 +205,7 @@ class Start_UI:
                         help = Help_one_UI(main,image)
                         
                 def test_function(event):
-                        tkMessageBox.showinfo("Never Miss Class", "Changes have been saved. The program is now running in the background.")
+                        #tkMessageBox.showinfo("Never Miss Class", "Changes have been saved. The program is now running in the background.")
                         weekdays = {0:"Monday",1:"Tuesday",2:"Wednesday",3:"Thursday",4:"Friday"}
                         today = datetime.datetime.now().weekday()
 
@@ -220,8 +221,30 @@ class Start_UI:
                                 if classes[0][i] != "":
                                         class_url = classes[0][i]
                                         class_time = time_convert(classes[1][i])
-                                        schedule.every().day.at(time_convert(classes[1][i])).do(webbrowser.open, classes[0][i])                                                
-     
+                                        schedule.every().day.at(time_convert(classes[1][i])).do(webbrowser.open, classes[0][i])               
+                       
+                        # a function for checking for pending classes
+                        def pending_classes():
+                                while True:
+                                        schedule.run_pending()
+                                        # open a file for dumping debug text
+                                        new_file = open("text.txt","w")
+                                        new_file.write(current_time() + " - Checked classes")
+                                        new_file.close()
+                                        # check every 5 seconds
+                                        time.sleep(5)
+                        
+                        # create a new thread and let pending_classes() run indefinitely
+                        try:
+                                thread.start_new_thread(pending_classes, ())
+                        except:
+                                # open a file for dumping debug text in case of an exception
+                                new_file = open("text.txt","w")
+                                new_file.write("An error has occurred in the scheduling function.")
+                                new_file.close()                      
+                                
+                        
+                                     
                 #Getting the default pictures
                 nl_mon_pic = PhotoImage(file="Images\Layer 5.gif")
                 nl_tues_pic = PhotoImage(file="Images\Layer 4.gif")
@@ -575,42 +598,10 @@ class Days_UI:
                 self.entry6.delete(0,END)
                 self.entry6.insert(0,self.in_textbox6) 
                 
-                
-        
-# takes a day object and returns the url of the class that needs to be launched next
-def pending_class(x):
-        li = [[],[]]
-        t = time_to_int(current_time())
-        # check for attributes, add them to a list
-        # if there is a url attribute, add the corresponding time attribute
-        if hasattr(in_textbox1, x):
-                li[0].append(time_convert(x.in_spin1))
-                li[1].append(x.in_textbox1)
-        if hasattr(in_textbox2, x):
-                li[0].append(time_convert(x.in_spin2))
-                li[1].append(x.in_textbox2)                
-        if hasattr(in_textbox3, x):
-                li[0].append(time_convert(x.in_spin3))
-                li[1].append(x.in_textbox3)                
-        if hasattr(in_textbox4, x):
-                li[0].append(time_convert(x.in_spin4))
-                li[1].append(x.in_textbox4)                
-        if hasattr(in_textbox5, x):
-                li[0].append(time_convert(x.in_spin5))
-                li[1].append(x.in_textbox5)                
-        if hasattr(in_textbox6, x):
-                li[0].append(time_convert(x.in_spin6))
-                li[1].append(x.in_textbox6)      
-        return class_url
-
-# takes a day object and returns the time of the class that needs to be launched next                                
-def pending_time():
-        return class_time
-
 # returns the current time in 24 hr format
 def current_time():
         now = datetime.datetime.now()
-        time = "%02d:%02d" % (now.hour, now.minute)
+        time = "%02d:%02d:%02d" % (now.hour, now.minute, now.second)
         return time
 
 # converts time from 12 hr format to 24 hr format
