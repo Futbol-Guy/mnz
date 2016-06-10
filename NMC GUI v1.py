@@ -665,5 +665,11 @@ def time_to_int(x):
 
 #running the start page
 root_main = Tk()
+# Makes the close button minimze
+root_main.protocol("WM_DELETE_WINDOW", root_main.iconify)
+# Replaces tk icon with a custom made one
+root_main.wm_iconbitmap('Images\img.ico')
+root_main.wm_title('Viewer')
+
 s = Start_UI(root_main)
 root_main.mainloop()
