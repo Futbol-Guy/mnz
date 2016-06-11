@@ -84,7 +84,7 @@ class Help_two_UI:
                 root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)                
-                centre_screen(root,500,300)
+                centre_screen(root,500,350)
                 #placing a canvas on the window to hold the baground image and text.
                 self.main_canvas = Canvas(root,width=1000,height=700, highlightthickness=0)
                 self.main_canvas.grid(row=0, column=0)
@@ -131,7 +131,7 @@ class Help_one_UI:
                 root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)                
-                centre_screen(root,500,300)
+                centre_screen(root,500,350)
                 
                 help_1 = PhotoImage(file="Images\Help 1.gif")
                 help_2 = PhotoImage(file="Images\Help 2.gif")
@@ -149,8 +149,7 @@ class Help_one_UI:
                 #creating the text seen on the page
                 self.main_canvas.create_text(20,90, text = "Welcome to Never Miss a Class! To get started, click what day you have",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(270,110, text = " a class on.",anchor=NW,font=self.customFont_small) 
-                self.main_canvas.create_text(20,450, text = "Next, select the time your class starts. This program will launch the class ",anchor=NW,font=self.customFont_small)
-                self.main_canvas.create_text(20,470, text = "Five minutes before the time that you select.",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(20,470, text = "Next, select the time your class starts.",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(780,90, text = "Next, get the class URL. ",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(520,260, text = "Copy the link pictured below and paste it into the appropriate text box. ",anchor=NW,font=self.customFont_small)
                 
@@ -468,7 +467,13 @@ class Days_UI:
                         self.p_name6 = self.main_canvas.create_text(250,450, text = "Class 6",anchor=NW,font=self.customFont)                
                                
         #creating a function that allows the user to change the name of each class 
-        def change_names(self):   
+        def change_names(self): 
+                self.main_canvas.delete(self.p_name1)
+                self.main_canvas.delete(self.p_name2)
+                self.main_canvas.delete(self.p_name3)
+                self.main_canvas.delete(self.p_name4)
+                self.main_canvas.delete(self.p_name5)
+                self.main_canvas.delete(self.p_name6)                
                 #placing entry boses over the text
                 self.entry7 = Entry(self.main_canvas,width = 12)
                 self.entry7.place(x=250,y=200)
@@ -522,12 +527,7 @@ class Days_UI:
                 self.entry12.destroy()
                 self.class_name_button.destroy()
                 #displaying the new names
-                self.main_canvas.delete(self.p_name1)
-                self.main_canvas.delete(self.p_name2)
-                self.main_canvas.delete(self.p_name3)
-                self.main_canvas.delete(self.p_name4)
-                self.main_canvas.delete(self.p_name5)
-                self.main_canvas.delete(self.p_name6) 
+                 
                 self.display_names()
                 
         #getting the spinner values
@@ -560,15 +560,15 @@ class Days_UI:
                 if self.name1 != "":
                         self.name_list[0] = self.name1
                 if self.name2 != "":
-                        self.name_list[1] = self.name2
+                        self.name_list[1] = self.name2               
                 if self.name3 != "":
-                        self.name_list[2] = self.name3
+                        self.name_list[2] = self.name3               
                 if self.name4 != "":
-                        self.name_list[3] = self.name4
+                        self.name_list[3] = self.name4               
                 if self.name5 != "":
-                        self.name_list[4] = self.name5
+                        self.name_list[4] = self.name5                
                 if self.name6 != "":
-                        self.name_list[5] = self.name6               
+                        self.name_list[5] = self.name6                
         
         #setting the values  the URL and time                
         def set_values(self):
