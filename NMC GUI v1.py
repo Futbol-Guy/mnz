@@ -43,6 +43,7 @@ def centre_screen(root,w,h):
 class Run_UI:
         def __init__(self,root):
                 #creating the title and window dimensions
+                root.iconbitmap('Images\img.ico')
                 root.title("Never Miss Class")
                 root.maxsize(width=450,height=300)
                 root.minsize(width=450,height=300) 
@@ -79,6 +80,7 @@ class Help_two_UI:
                 self.customFont_small = tkFont.Font(family="Minecraft", size=10)
                  
                  #setting the title, and dimensions of the window
+                root.iconbitmap('Images\img.ico')
                 root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)                
@@ -125,6 +127,7 @@ class Help_one_UI:
                 #setting a custom font
                 self.customFont_small = tkFont.Font(family="Minecraft", size=10)
                 #creating the title and dimensions of the window 
+                root.iconbitmap('Images\img.ico')                  
                 root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)                
@@ -184,6 +187,7 @@ class Help_one_UI:
 class Start_UI:         
         def __init__(self, root):
                 #setting the title and window dimensions
+                root.iconbitmap('Images\img.ico')
                 root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)
@@ -241,8 +245,15 @@ class Start_UI:
                         image= PhotoImage(file="Images\Help Art.gif")
                         main = Toplevel(root_main)
                         help = Help_one_UI(main,image)
+                
+                
+                
+                def close_window(): 
+                        window.destroy()
+                        #sys.exit()
+                
                         
-                def test_function(event):
+                def main_function(event):
                         main = Toplevel(root_main)                       
                         Run_UI(main)
                         weekdays = {0:"Monday",1:"Tuesday",2:"Wednesday",3:"Thursday",4:"Friday"}
@@ -325,9 +336,8 @@ class Start_UI:
                 label_btues.grid(row=1, column= 1)
                 label_btues.bind("<Enter>", lambda event: btuesday_L(event, l_btues_pic))
                 label_btues.bind("<Leave>", lambda event: btuesday_L(event, nl_btues_pic))
-                label_btues.bind("<Button-1>", test_function)
-                # _------------------------------^-----------------
-                # Do we want to change the name of this ^ ?
+                label_btues.bind("<Button-1>", main_function)
+                
                         
                 label_wednesday = Label(root, image= nl_wed_pic, borderwidth = 0, highlightthickness= 0)
                 label_wednesday.grid(row=0, column= 2)
@@ -365,9 +375,9 @@ class Start_UI:
 #creating a class to run all of the days        
 class Days_UI:         
         def __init__(self, root,bg_image,name):
-                #webbrowser.open("www.virtuallearning.ca")  
                 self.name = name
                 centre_screen(root,500,350)
+                root.iconbitmap('Images\img.ico')
                 root.title("Never Miss A Class")
                 root.maxsize(width=1000,height=700)
                 root.minsize(width=1000,height=700)
@@ -668,8 +678,8 @@ root_main = Tk()
 # Makes the close button minimze
 root_main.protocol("WM_DELETE_WINDOW", root_main.iconify)
 # Replaces tk icon with a custom made one
-root_main.wm_iconbitmap('Images\img.ico')
-root_main.wm_title('Viewer')
+root_main.iconbitmap('Images\img.ico')
+
 
 s = Start_UI(root_main)
 root_main.mainloop()
