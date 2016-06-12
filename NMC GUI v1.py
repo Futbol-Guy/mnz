@@ -248,9 +248,8 @@ class Start_UI:
                         main = Toplevel(root_main)
                         help = Help_one_UI(main,image)  
                 
-                def close_window(): 
-                        window.destroy()
-                        #sys.exit()
+                def close_window(event): 
+                        root_main.destroy()
                 
                         
                 def main_function(event):
