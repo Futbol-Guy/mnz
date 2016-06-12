@@ -123,7 +123,7 @@ class Help_two_UI:
                 self.main_canvas.create_text(20,90, text = "Finally, save your changes by clicking the button. Then click the 'Run' button on the home page.",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(20,110, text = "If you would like to lauch the Connect window instead of the class in a new tab (eg. when the class is launched in firefox), launch the class in firefox and copy ",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(20,130, text = "the link found in the pop up window (not in the actual connect room).",anchor=NW,font=self.customFont_small)
-                self.main_canvas.create_text(430,150, text = "For more useful information and help, have a look at our blog website  ",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(430,150, text = "For more useful information and help, have a look at our website  ",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(430,170, text = "and read the readMe file located in where this program is installed.",anchor=NW,font=self.customFont_small)               
                 
                 #creating the click-able link
