@@ -2,13 +2,13 @@
 #
 # NMC GUI v1.2
 #
-# We've got proper comments this time
+# 
 #
 # Authors: Muhammad Abdulhafiz, Najib Abukar and Zachary van Noppen
 #
-# Prupose: To create a program that allows a user to schedule a class and have that class open automatically.
+# Purpose: To create a program that allows a user to schedule a class and have that class open automatically.
 #
-# Date: 
+# 
 #
 #--------------------------------------------
 
@@ -94,7 +94,7 @@ class Help_two_UI:
                 
                 help_1 = PhotoImage(file="Images\Help 7.gif")
                 #creating the text
-                self.main_canvas.create_text(20,90, text = "Finally, save your changes by clicking the button.",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(20,90, text = "Finally, save your changes by clicking the button. Then click the 'Run' button on the home page.",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(20,110, text = "If you would like to lauch the Connect window instead of the class in a new tab (eg. when the class is launched in firefox), launch the class in firefox and copy ",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(20,130, text = "the link found in the pop up window (not in the actual connect room).",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(430,150, text = "For more information and help, watch the tutorial video supplied         and read the readMe",anchor=NW,font=self.customFont_small)
@@ -167,7 +167,7 @@ class Help_one_UI:
                 self.h3_canvas.create_image(0,0,image=help_3,anchor=NW)
                 self.h3_canvas.image = help_3
                 self.h4_canvas = Canvas(self.main_canvas,width=350,height=174, highlightthickness=0)
-                self.h4_canvas.place(x=620,y=280)
+                self.h4_canvas.place(x=520,y=280)
                 self.h4_canvas.create_image(0,0,image=help_4,anchor=NW)
                 self.h4_canvas.image = help_4
                 self.h5_canvas = Canvas(self.main_canvas,width=408,height=157, highlightthickness=0)
@@ -210,6 +210,9 @@ class Start_UI:
                 
                 def btuesday_L(event,pic):
                         label_btues.config(image=pic)
+                        
+                def bwednesday_L(event,pic):
+                        label_bwed.config(image=pic)                
                 
                 def bthursday_L(event,pic):
                         label_bthur.config(image=pic)
@@ -243,9 +246,7 @@ class Start_UI:
                 def lift_help(event):
                         image= PhotoImage(file="Images\Help Art.gif")
                         main = Toplevel(root_main)
-                        help = Help_one_UI(main,image)
-                
-                
+                        help = Help_one_UI(main,image)  
                 
                 def close_window(): 
                         window.destroy()
@@ -309,7 +310,8 @@ class Start_UI:
                 l_wed_pic = PhotoImage(file="Images\L_W.gif")
                 l_thurs_pic = PhotoImage(file="Images\L_Th.gif")
                 l_fri_pic = PhotoImage(file="Images\L_F.gif")
-                l_btues_pic = PhotoImage(file="Images\L_BT.gif")    
+                l_btues_pic = PhotoImage(file="Images\L_BT.gif") 
+                l_bwed_pic = PhotoImage(file="Images\L_BW.gif")
                 l_bthurs_pic = PhotoImage(file="Images\L_BTh.gif")
                 
                 #creating a label for each image and placing images in those labels       
@@ -345,8 +347,10 @@ class Start_UI:
                 label_wednesday.bind("<Button-1>", lift_wednesday)
                 
                 label_bwed = Label(root, image = nl_bwed_pic, borderwidth = 0, highlightthickness= 0)
-                label_bwed.image = nl_bwed_pic
-                label_bwed.grid(row=1,column=2)                
+                label_bwed.grid(row=1,column=2)
+                label_bwed.bind("<Enter>", lambda event: bwednesday_L(event, l_bwed_pic))
+                label_bwed.bind("<Leave>", lambda event: bwednesday_L(event, nl_bwed_pic))
+                label_bwed.bind("<Button-1>", lift_help)                
                         
                 label_thursday = Label(root, image= nl_thurs_pic, borderwidth = 0, highlightthickness= 0)
                 label_thursday.grid(row=0, column= 3)
@@ -358,7 +362,7 @@ class Start_UI:
                 label_bthur.grid(row=1, column= 3)
                 label_bthur.bind("<Enter>", lambda event: bthursday_L(event, l_bthurs_pic))
                 label_bthur.bind("<Leave>", lambda event: bthursday_L(event, nl_bthurs_pic))
-                label_bthur.bind("<Button-1>", lift_help)                
+                label_bthur.bind("<Button-1>", close_window)                
                         
                 label_friday = Label(root, image= nl_fri_pic, borderwidth = 0, highlightthickness= 0)
                 label_friday.grid(row=0, column= 4)
@@ -504,14 +508,10 @@ class Days_UI:
                 f = open(str(self.name + ".txt"), "w")
                 for row in li:
                         for item in row:
-                                f.write(str(item) + "|") # is str(item) necessary?
+                                f.write(str(item) + "|") 
                         f.write("\n")
                 f.close()
                      
-                #self.in_textbox5 = li[0][4]
-                #self.in_textbox6 = li[0][5]
-                #self.in_spin5 = li[1][4]
-                #self.in_spin6 = li[1][5]
         
         #creating a function to save names        
         def save_names(self):
