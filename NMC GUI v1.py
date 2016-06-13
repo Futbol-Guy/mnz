@@ -301,10 +301,6 @@ class Start_UI:
                         def pending_classes():
                                 while True:
                                         schedule.run_pending()
-                                        # open a file for dumping debug text
-                                        new_file = open("text.txt","w")
-                                        new_file.write(current_time() + " - Checked classes")
-                                        new_file.close()
                                         # check every 5 seconds
                                         time.sleep(5)
                         
@@ -313,7 +309,7 @@ class Start_UI:
                                 thread.start_new_thread(pending_classes, ())
                         except:
                                 # open a file for dumping debug text in case of an exception
-                                new_file = open("text.txt","w")
+                                new_file = open("debug.txt","w")
                                 new_file.write("An error has occurred in the scheduling function.")
                                 new_file.close()                      
                                 
