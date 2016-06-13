@@ -57,7 +57,33 @@ class Run_UI:
                 #deleting anything previously in the text field
                 self.text_field.delete(1.0,END)
                 #putting stuff in the text field. Works just like appending onto a list. 
-                self.text_field.insert(END, "Changes have been saved. The program is now running in the background.")
+                self.text_field.insert(END, "The program is now running in the background. \n")
+
+                #open the current day's database file
+                today = datetime.datetime.now().weekday() 
+                weekdays = {0:"Monday",1:"Tuesday",2:"Wednesday",3:"Thursday",4:"Friday"}
+                f = open(weekdays[today]+".txt", "r")
+                classes = []
+                for line in f:
+                        classes.append(line.strip("\n").split("|"))                       
+                f.close()                        
+                
+                # sort the 2d list by class times, and sort the class names and URLs
+                # in the same way so the times and names stay together
+                insert_sort(classes[1], classes[0], classes[2])
+                
+                # print out the sorted schedule
+                self.text_field.insert(END, "Here is "+weekdays[today]+"'s schedule: \n")
+                self.text_field.insert(END, ("{0:25}{1:>10}").format("Class Name", "Class Time \n"))
+                self.text_field.insert(END, "-" * 35 + "\n")
+
+                # iterate through the list of URLs
+                for i in range(len(classes[0])):
+                        # for every non-empty url, print the associated name and date of the class
+                        if classes[0][i] != "":
+                                self.text_field.insert(END, ("{0:25}{1:>10}").format(classes[2][i], classes[1][i] + "\n"))
+                
+                # disable the text field after writing to it
                 self.text_field.configure(state='disabled')                 
                 self.text_field.place(x=5,y=5)
                 
@@ -250,8 +276,7 @@ class Start_UI:
                 
                 def close_window(event): 
                         root_main.destroy()
-                
-                        
+                                        
                 def main_function(event):
                         main = Toplevel(root_main)                       
                         Run_UI(main)
@@ -671,6 +696,31 @@ def time_to_int(x):
                         x = "0" + x
                 time = (int(x[0:2]) * 60) + int(x[3:5])                 
         return time 
+
+# this insertion sort algorithm was sourced from the "Sorting Algorithms" page in the investigations
+# accepts a list of class times and a list of names and sorts by time 
+
+def insert_sort(class_times, class_urls, class_names):     
+        for i in range(len(class_times)-1):
+                j = i + 1 # j will go from 1 to max_index
+                item_time = class_times[j] # temporary storage of item
+                item_urls = class_urls[j]
+                item_names = class_names[j]
+                # Run through the list backwards until item is less than element
+                while (j > 0) and (time_to_int(time_convert(item_time)) < time_to_int(time_convert(class_times[j-1]))):
+                        # Shift larger items to the right by one
+                        class_times[j] = class_times[j-1]   
+                        class_urls[j] = class_urls[j-1] 
+                        class_names[j] = class_names[j-1] 
+                        # Prepare to check the next item to the left
+                        j -= 1
+                        # put sorted item in open location
+                        class_times[j] = item_time
+                        class_urls[j] = item_urls
+                        class_names[j] = item_names
+        
+        # return a sorted 2d list                
+        return [class_times, class_urls, class_names]
 
 #running the start page
 root_main = Tk()
