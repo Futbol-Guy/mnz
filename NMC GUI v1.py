@@ -671,15 +671,21 @@ class Days_UI:
 def time_convert(x):
         time = "0:00" # default value
         if "AM" in x:
-                time = x.strip(" AM")
+                split_time = x.strip(" AM").split(":")
+                hours = str(int(split_time[0]))
+                #use 0 to represent midnight (12:00 AM) instead of 12
+                if str(int(hours) + 12) == "24":
+                        hours = "0"
+                # put the string back together again
+                time = hours + ":" + split_time[1]                
         if "PM" in x:
                 # split the time in half by the colon, ex. 9:30 becomes 9 and 30
                 split_time = x.strip(" PM").split(":")
                 # add 12 to the hours portion
                 hours = str(int(split_time[0]) + 12)
-                #use 0 to represent midnight (12:00 PM) instead of 24
+                #use 12 to represent noon (12:00 PM) instead of 24
                 if hours == "24":
-                        hours = "0"
+                        hours = "12"
                 # put the string back together again
                 time = hours + ":" + split_time[1]
         return time
