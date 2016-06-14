@@ -34,7 +34,7 @@ def centre_screen(root,w,h):
         
         # calculate x and y coordinates for the Tk root window
         x = (ws/2) - (w)
-        y = (hs/2) - (h)
+        y = (hs/2) - (h+30)
         
         #placing the window on the screen
         root.geometry('%dx%d+%d+%d' % (1000, 700, x, y)) 
@@ -75,7 +75,7 @@ class Run_UI:
                 # set up default names for any classes the user has not named
                 for i in range(len(classes[2])):
                         if classes[2][i] == "":
-                                classes[2][i] = "Class " + str(i)
+                                classes[2][i] = "Class " + str(i)                
                 
                 # print out the sorted schedule
                 self.text_field.insert(END, "Here is "+weekdays[today]+"'s schedule: \n")
@@ -280,7 +280,8 @@ class Start_UI:
                         help = Help_one_UI(main,image)  
                 
                 def close_window(event): 
-                        root_main.destroy()
+                        if tkMessageBox.askyesno("NMC","Quitting will stop the effects of the program. Your classes will not be launched automatically. Would you still like to quit?"):
+                                root_main.destroy()
                                         
                 def main_function(event):
                         main = Toplevel(root_main)                       
