@@ -665,12 +665,6 @@ class Days_UI:
                 self.entry6.insert(0,self.in_textbox6)
                 self.entry6.delete(0,END)
                 self.entry6.insert(0,self.in_textbox6) 
-                
-# returns the current time in 24 hr format
-def current_time():
-        now = datetime.datetime.now()
-        time = "%02d:%02d:%02d" % (now.hour, now.minute, now.second)
-        return time
 
 # converts time from 12 hr format to 24 hr format
 def time_convert(x):
