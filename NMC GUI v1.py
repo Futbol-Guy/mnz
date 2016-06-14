@@ -72,6 +72,11 @@ class Run_UI:
                 # in the same way so the times and names stay together
                 insert_sort(classes[1], classes[0], classes[2])
                 
+                # set up default names for any classes the user has not named
+                for i in range(len(classes[2])):
+                        if classes[2][i] == "":
+                                classes[2][i] = "Class " + str(i)
+                
                 # print out the sorted schedule
                 self.text_field.insert(END, "Here is "+weekdays[today]+"'s schedule: \n")
                 self.text_field.insert(END, ("{0:25}{1:>10}").format("Class Name", "Class Time \n"))
