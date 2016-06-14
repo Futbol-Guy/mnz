@@ -1,2 +1,0 @@
-# mnz
-Create NMAC Program
