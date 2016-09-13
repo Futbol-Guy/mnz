@@ -26,6 +26,9 @@ import re
 import tkMessageBox
 import thread
 
+# global variable
+launched_classes = []
+
 #creating a function to centre the window on the screen
 def centre_screen(root,w,h):
         # get screen width and height
@@ -62,6 +65,7 @@ class Run_UI:
                 #open the current day's database file
                 today = datetime.datetime.now().weekday() 
                 weekdays = {0:"Monday",1:"Tuesday",2:"Wednesday",3:"Thursday",4:"Friday"}
+                
                 f = open(weekdays[today]+".txt", "r")
                 classes = []
                 for line in f:
@@ -295,31 +299,46 @@ class Start_UI:
                                 classes.append(line.strip("\n").split("|"))
                         f.close()
                         
+                        def launch_class(x):
+                                global launched_classes
+                                if x in launched_classes:
+                                        print "class not launched"
+                                else:
+                                        webbrowser.open(x)
+                                        launched_classes.append(x)
+                        
                         for i in range(len(classes[0])):
                                 # add every class entered for the current day to the job queue
                                 # along with its scheduled time in 24 hr format
                                 if classes[0][i] != "":
                                         class_url = classes[0][i]
-                                        class_time = time_convert(classes[1][i])
-                                        schedule.every().day.at(time_convert(classes[1][i])).do(webbrowser.open, classes[0][i])               
+                                        class_time = int_to_time(time_to_int(time_convert(classes[1][i])) - 3)
+                                        #schedule.every().day.at(time_convert(classes[1][i])).do(webbrowser.open, classes[0][i]) 
+                                        schedule.every().day.at(class_time).do(launch_class, classes[0][i])
+                                        
                        
                         # a function for checking for pending classes
                         def pending_classes():
                                 while True:
+                                        # check if the thread needs to end
+                                        if run_button_pressed:
+                                                break
+                                        # run any pending classes
                                         schedule.run_pending()
-                                        # check every 5 seconds
-                                        time.sleep(5)
-                        
+                                        # delay checks by 2 seconds
+                                        time.sleep(2)
+                                print "Thread ended"
+                                return schedule.CancelJob
+                                        
                         # create a new thread and let pending_classes() run indefinitely
                         try:
+                                run_button_pressed = False
                                 thread.start_new_thread(pending_classes, ())
                         except:
                                 # open a file for dumping debug text in case of an exception
                                 new_file = open("debug.txt","w")
                                 new_file.write("An error has occurred in the scheduling function.")
                                 new_file.close()                      
-                                
-                        
                                      
                 nl_mon_pic = PhotoImage(file="Images\Layer 5.gif")
                 nl_tues_pic = PhotoImage(file="Images\Layer 4.gif")
@@ -697,6 +716,14 @@ def time_to_int(x):
                 if len(x) < 5:
                         x = "0" + x
                 time = (int(x[0:2]) * 60) + int(x[3:5])                 
+        return time 
+
+# opposite of time_to_int
+def int_to_time(x):
+        time = "0:00" # default value
+        hours = x / 60
+        minutes = x % 60
+        time = str(hours) + ":%02d" % (minutes)
         return time 
 
 # this insertion sort algorithm was sourced from the "Sorting Algorithms" page in the investigations
