@@ -128,14 +128,15 @@ class Help_two_UI:
                 self.main_canvas.image=bg_image 
                 
                 help_1 = PhotoImage(file="Images\Help 7.gif")
+                help_2 = PhotoImage(file="Images\Help 8.gif")
                 #creating the text
                 self.main_canvas.create_text(20,90, text = "Finally, save your changes by clicking the button. Then click the 'Run' button on the home page.",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(20,110, text = "If you would like to lauch the Connect window instead of the class in a new tab (eg. when the class is launched in firefox), launch the class in firefox and copy ",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(20,130, text = "the link found in the pop up window (not in the actual connect room).",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(430,150, text = "For more useful information and help, take a look at our website", anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(430,170, text = "and read the readMe file located in where this program is installed.",anchor=NW,font=self.customFont_small) 
-                self.main_canvas.create_text(430,210, text = "NOTE #1: The program won't run until you press 'run' on the homepage!",anchor=NW,font=self.customFont_small)
-                self.main_canvas.create_text(430,230, text = "NOTE #2: The class will open 3 mins before the selected time!",anchor=NW,font=self.customFont_small)                
+                self.main_canvas.create_text(330,410, text = "NOTE #1: The program won't run until you press 'run' on the homepage!",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(330,430, text = "NOTE #2: The class will open 3 mins before the selected time!",anchor=NW,font=self.customFont_small)                
                                 
                 #creating the click-able link
                 self.obj1Id = self.main_canvas.create_text(430,150,activefill="#33adff",text='For more useful information and help, take a look at our website', fill="#0099ff",tags='obj1Tag',anchor=NW,font=self.customFont_small)
@@ -151,7 +152,12 @@ class Help_two_UI:
                 self.h1_canvas = Canvas(self.main_canvas,width=400,height=246, highlightthickness=0)
                 self.h1_canvas.place(x=20,y=150)
                 self.h1_canvas.create_image(0,0,image=help_1,anchor=NW)
-                self.h1_canvas.image = help_1                
+                self.h1_canvas.image = help_1
+                
+                self.h2_canvas = Canvas(self.main_canvas,width=300,height=217, highlightthickness=0)
+                self.h2_canvas.place(x=20,y=400)
+                self.h2_canvas.create_image(0,0,image=help_2,anchor=NW)
+                self.h2_canvas.image = help_2                
                                 
 
 class Help_one_UI:
