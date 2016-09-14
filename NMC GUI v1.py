@@ -133,7 +133,9 @@ class Help_two_UI:
                 self.main_canvas.create_text(20,110, text = "If you would like to lauch the Connect window instead of the class in a new tab (eg. when the class is launched in firefox), launch the class in firefox and copy ",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(20,130, text = "the link found in the pop up window (not in the actual connect room).",anchor=NW,font=self.customFont_small)
                 self.main_canvas.create_text(430,150, text = "For more useful information and help, take a look at our website", anchor=NW,font=self.customFont_small)
-                self.main_canvas.create_text(430,170, text = "and read the readMe file located in where this program is installed.",anchor=NW,font=self.customFont_small)               
+                self.main_canvas.create_text(430,170, text = "and read the readMe file located in where this program is installed.",anchor=NW,font=self.customFont_small) 
+                self.main_canvas.create_text(430,210, text = "NOTE #1: The program won't run until you press 'run' on the homepage!",anchor=NW,font=self.customFont_small)
+                self.main_canvas.create_text(430,230, text = "NOTE #2: The class will open 3 mins before the selected time!",anchor=NW,font=self.customFont_small)                
                                 
                 #creating the click-able link
                 self.obj1Id = self.main_canvas.create_text(430,150,activefill="#33adff",text='For more useful information and help, take a look at our website', fill="#0099ff",tags='obj1Tag',anchor=NW,font=self.customFont_small)
@@ -442,7 +444,7 @@ class Days_UI:
                 self.main_canvas.image=bg_image              
                      
                 #creating a tuple of times to put in the spinner        
-                time_tuple = ("6:00 AM","6:15 AM","6:30 AM","6:45 AM","7:00 AM","7:15 AM","7:30 AM","7:45 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM","9:15 AM","9:30 AM","9:40 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 PM","12:15 PM","12:30 PM","12:45 PM","1:00 PM","1:15 PM","1:30 PM","1:45 PM","2:00 PM","2:15 PM","2:30 PM","2:45 PM","3:00 PM","3:15 PM","3:30 PM","3:45 PM","4:00 PM","4:15 PM","4:30 PM","4:45 PM","5:00 PM","5:15 PM","5:30 PM","5:45 PM","6:00 PM","6:15 PM","6:30 PM","6:45 PM","7:00 PM","7:15 PM","7:30 PM","7:45 PM","8:00 PM","8:15 PM","8:30 PM","8:45 PM","9:00 PM")
+                time_tuple = ("6:00 AM","6:15 AM","6:30 AM","6:45 AM","7:00 AM","7:15 AM","7:30 AM","7:45 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM","9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 PM","12:15 PM","12:30 PM","12:45 PM","1:00 PM","1:15 PM","1:30 PM","1:45 PM","2:00 PM","2:15 PM","2:30 PM","2:45 PM","3:00 PM","3:15 PM","3:30 PM","3:45 PM","4:00 PM","4:15 PM","4:30 PM","4:45 PM","5:00 PM","5:15 PM","5:30 PM","5:45 PM","6:00 PM","6:15 PM","6:30 PM","6:45 PM","7:00 PM","7:15 PM","7:30 PM","7:45 PM","8:00 PM","8:15 PM","8:30 PM","8:45 PM","9:00 PM")
                 
                 #placing the buttons
                 self.class_name_button = Button(self.main_canvas, text="Change Class Name ",command= self.change_names,font=self.customFont_small)
